@@ -20,6 +20,10 @@ body {
     padding-top: 30px;
 }
 
+#content canvas {
+    border: 5px solid #999;
+}
+
 #feed{
     width: 200px;
 }
