@@ -23,34 +23,38 @@ var Keys = {
 Player = function(name){
     this.name = name;
     this.score = 0;
-    this.x = map.x / 2;
-    this.y = map.y / 2;
+    this.x = map_dimensions.x / 2;
+    this.y = map_dimensions.y / 2;
     this.direction = 0;
     this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
 }
 
 
 Player.prototype.update = function() {
+	var original_x = this.x;
+	var original_y = this.y;
+
     if (Keys.isDown(Keys.DOWN)) {
         this.y += 1;
         this.direction = 3 * Math.PI / 2;
-        localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.UP)) {
         this.y -= 1;
         this.direction = Math.PI / 2;
-        localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.RIGHT)) {
         this.x += 1;
         this.direction = 0;
-        localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.LEFT)) {
         this.x -= 1;
         this.direction = Math.PI;
-        localPlayerDataRef.set(player);
     }
+	if (!map.canMove(this.x, this.y)) {
+		this.y = original_y;
+		this.x = original_x;
+	}
+	localPlayerDataRef.set(player);
 }
 
 var setupPlayersFirebase = function() {

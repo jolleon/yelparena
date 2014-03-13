@@ -1,17 +1,9 @@
 var canvas = $('#main').get(0);
 var ctx = canvas.getContext("2d");
+var map = new Map(canvas.width, canvas.height);
 
 var clearCanvas = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "#999";
-    ctx.lineWidth = 10;
-    ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.lineTo(0, canvas.height);
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(canvas.width, 0);
-    ctx.closePath();
-    ctx.stroke();
 }
 
 var resizeCanvas = function(w, h){
@@ -66,13 +58,13 @@ $(document).ready(function() {
 
     firebaseUrl = 'https://yelparena.firebaseio.com/'
     mapDataRef = new Firebase(firebaseUrl + 'map');
-    map = {'x': 0, 'y': 0};
+    map_dimensions = {'x': 0, 'y': 0};
     players = [];
 	bullets = [];
 
     mapDataRef.on('value', function(snapshot){
-        map = snapshot.val();
-        resizeCanvas(map.x, map.y);
+        map_dimensions = snapshot.val();
+        resizeCanvas(map_dimensions.x, map_dimensions.y);
         clearCanvas();
 
     });
