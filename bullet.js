@@ -12,7 +12,24 @@ function Bullet(id, x, y, player){
 	bulletsDataRef.child(id).set(this);
 }
 
-Bullet.prototype.move = function() {
+Bullet.prototype.update = function() {
 	this.x += this.speed * Math.cos(this.direction);
 	this.y += this.speed * Math.sin(this.direction);
+
+	if (map.canMove(this.x, this.y) != true){
+		bulletsDataRef.child(id).remove()
+	}
 }
+
+var setupBulletsFirebase = function() {
+	bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
+	
+	bulletsDataRef.on('child_added', function(snapshot){
+		bullets.push(snapshot.val());
+	});
+	
+	bulletsDataRef.on('value', function(snapshot){
+	});
+}
+
+
