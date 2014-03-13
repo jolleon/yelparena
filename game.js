@@ -64,8 +64,6 @@ $(document).ready(function() {
         });
     }
 
-    // start the loop
-    startAnimation();
     firebaseUrl = 'https://yelparena.firebaseio.com/'
     mapDataRef = new Firebase(firebaseUrl + 'map');
     map = {'x': 0, 'y': 0};
@@ -84,6 +82,8 @@ $(document).ready(function() {
 
         setupPlayersFirebase();
         createPlayer(name);
+        // start the loop
+        startAnimation();
 
         // listen to key press
         window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);

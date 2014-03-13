@@ -10,7 +10,7 @@ var drawPlayer = function(p) {
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
-    ctx.lineTo(p.x + gunLength * Math.cos(p.direction), p.y + gunLength * Math.sin(p.direction));
+    ctx.lineTo(p.x + gunLength * Math.cos(p.direction), p.y - gunLength * Math.sin(p.direction));
     ctx.stroke();
 
 }

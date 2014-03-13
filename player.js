@@ -33,18 +33,22 @@ Player = function(name){
 Player.prototype.update = function() {
     if (Keys.isDown(Keys.DOWN)) {
         this.y += 1;
+        this.direction = 3 * Math.PI / 2;
         localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.UP)) {
         this.y -= 1;
+        this.direction = Math.PI / 2;
         localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.RIGHT)) {
         this.x += 1;
+        this.direction = 0;
         localPlayerDataRef.set(player);
     }
     if (Keys.isDown(Keys.LEFT)) {
         this.x -= 1;
+        this.direction = Math.PI;
         localPlayerDataRef.set(player);
     }
 }
