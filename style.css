@@ -1,0 +1,48 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Lucida Console";
+    text-align: center;
+    margin: 0;
+}
+
+#name-prompt {
+    position: absolute;
+    left: 400px;
+    top: 300px;
+    height: 100px;
+    width: 500px;
+    background-color: #333;
+    border: solid 3px white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding-top: 30px;
+}
+
+#feed{
+    width: 200px;
+}
+
+.p0 {
+    color: #f00;
+}
+.p1 {
+    color: #ff0;
+}
+.p2 {
+    color: #0f0;
+}
+.p3 {
+    color: #b0f;
+}
+.p4 {
+    color: #f80;
+}
+.p5 {
+    color: #0ff;
+}
+
+img {
+    padding: 5px;
+}
