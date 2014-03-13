@@ -44,7 +44,7 @@ Map.prototype.map_block_coordinates = function() {
 	for (var y = 0; y < this.map_height; y++) {
 		for (var x = 0; x < this.map_height; x++) {
 			if (this.canMoveMap(x, y)) {
-				var point = [x * game_block_dimensions.width, y * game_block_dimensions.height]
+				var point = [x * game_block_dimensions.width, y * game_block_dimensions.height];
 				map_block_coordinates.push(point);
 			}
 		}
