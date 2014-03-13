@@ -73,6 +73,7 @@ $(document).ready(function() {
     mapDataRef = new Firebase('https://cs2d.firebaseio.com/map');
     map = {'x': 0, 'y': 0};
     players = [];
+	bullets = [];
 
     mapDataRef.on('value', function(snapshot){
         map = snapshot.val();
