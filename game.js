@@ -69,8 +69,8 @@ $(document).ready(function() {
 
     // start the loop
     startAnimation();
-
-    mapDataRef = new Firebase('https://cs2d.firebaseio.com/map');
+    firebaseUrl = 'https://yelparena.firebaseio.com/'
+    mapDataRef = new Firebase(firebaseUrl + 'map');
     map = {'x': 0, 'y': 0};
     players = [];
 	bullets = [];
@@ -86,7 +86,7 @@ $(document).ready(function() {
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
 
-        playersDataRef = new Firebase('https://cs2d.firebaseio.com/players');
+        playersDataRef = new Firebase(firebaseUrl + 'players');
         playersDataRef.on('child_added', function(snapshot){
             var new_player = snapshot.val();
             new_player.id = snapshot.name();
