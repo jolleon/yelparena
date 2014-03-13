@@ -25,10 +25,29 @@ Player = function(name){
     this.score = 0;
     this.x = map.x / 2;
     this.y = map.y / 2;
+    this.direction = 0;
     this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
 }
 
 
+Player.prototype.update = function() {
+    if (Keys.isDown(Keys.DOWN)) {
+        this.y += 1;
+        localPlayerDataRef.set(player);
+    }
+    if (Keys.isDown(Keys.UP)) {
+        this.y -= 1;
+        localPlayerDataRef.set(player);
+    }
+    if (Keys.isDown(Keys.RIGHT)) {
+        this.x += 1;
+        localPlayerDataRef.set(player);
+    }
+    if (Keys.isDown(Keys.LEFT)) {
+        this.x -= 1;
+        localPlayerDataRef.set(player);
+    }
+}
 
 var setupPlayersFirebase = function() {
 
