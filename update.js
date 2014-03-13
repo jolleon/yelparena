@@ -6,11 +6,11 @@ var updateGame = function() {
     }
 
 	if(Keys.isDown(Keys.SPACE)) {
-		bullet = new Bullet(player.x, player.y);
-		bullets.push(bullet);
+		var bullet = new Bullet(bullets.length, player.x, player.y, player.name);
 	}
 
 	for (var i=0; i<bullets.length; i++){
-		bullets[i].move();
+		var bullet = bullets[i];
+		bullet.move();
 	}
 }

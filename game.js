@@ -82,6 +82,8 @@ $(document).ready(function() {
 
     });
 
+	bulletsDataRef = new Firebase(firebaseUrl + 'bullets');
+
     $('#name-prompt button').click(function(e){
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
