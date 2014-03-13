@@ -49,10 +49,6 @@ var mainloop = function(){
 
 $(document).ready(function() {
 
-    // listen to key press
-    window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
-    window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
-
     // setup fullscreen button
     if (fullScreenApi.supportsFullScreen) {
         $('#fullscreen').click(function() {
@@ -107,6 +103,9 @@ $(document).ready(function() {
         player = new Player(name);
         localPlayerDataRef.set(player);
 
+        // listen to key press
+        window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
+        window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
     });
 
 });

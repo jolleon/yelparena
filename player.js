@@ -1,7 +1,9 @@
 var Keys = {
-    DOWN: 40, // down
-    RIGHT: 39, // right
-    SPACE: 32,
+    UP: 87, // w
+    DOWN: 83, // s
+    LEFT: 65, // a
+    RIGHT: 68, // d
+    SHOOT: 32, // space
 
     _pressed: {},
 
