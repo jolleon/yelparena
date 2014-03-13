@@ -82,34 +82,8 @@ $(document).ready(function() {
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
 
-        playersDataRef = new Firebase(firebaseUrl + 'players');
-        playersDataRef.on('child_added', function(snapshot){
-            var new_player = snapshot.val();
-            new_player.id = snapshot.name();
-            $('#feed').append(new_player.name + ' joined<br>');
-            players.push(new_player);
-        });
-        playersDataRef.on('child_removed', function(snapshot){
-            $('#feed').append(snapshot.val().name + ' left<br>');
-            // ok this is retarted but js is even more retarted
-            for (var i=0; i<players.length; i++){
-                if (players[i].id == snapshot.name()){
-                    players.splice(i, 1);
-                }
-            }
-        });
-        playersDataRef.on('child_changed', function(snapshot){
-            for (var i=0; i<players.length; i++){
-                if (players[i].id == snapshot.name()){
-                    players[i] = snapshot.val();
-                    players[i].id = snapshot.name();
-                }
-            }
-        });
-        localPlayerDataRef = playersDataRef.push();
-        localPlayerDataRef.onDisconnect().remove();
-        player = new Player(name);
-        localPlayerDataRef.set(player);
+        setupPlayersFirebase();
+        createPlayer(name);
 
         // listen to key press
         window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
