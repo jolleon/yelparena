@@ -25,22 +25,3 @@ Player = function(name){
     this.y = map.y / 2;
     this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
 }
-
-
-var updateGame = function() {
-    if (Keys.isDown(Keys.DOWN)) {
-        player.y += 1;
-        localPlayerDataRef.set(player);
-    }
-
-}
-
-var drawGame = function() {
-    clearCanvas();
-    for(var i=0; i<players.length; i++){
-        var p = players[i];
-        ctx.fillStyle = p.color;
-        ctx.fillRect(p.x - 5, p.y - 5, 10, 10);
-    }
-
-}
