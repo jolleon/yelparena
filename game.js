@@ -80,6 +80,11 @@ $(document).ready(function() {
     });
 
 	bulletsDataRef = new Firebase(firebaseUrl + 'bullets');
+	bulletsDataRef.on('child_added', function(snapshot){
+		bullets.push(snapshot.val());
+	});
+	bulletsDataRef.on('value', function(snapshot){
+	});
 
     $('#name-prompt button').click(function(e){
         name = $('#name-prompt input').val();

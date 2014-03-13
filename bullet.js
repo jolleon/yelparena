@@ -5,7 +5,7 @@ function Bullet(id, x, y, player){
 	this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff']; //pick cool bullet color
 	this.speed = 0.1; // no idea what's appropriate here
 	this.direction = 0;
-	this.size = 3;
+	this.size = 10;
 	this.player = player;
 
 	//write into Firebase

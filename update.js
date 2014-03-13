@@ -23,6 +23,7 @@ var updateGame = function() {
 
 	// move every buillet on screen
 	for (var i=0; i<bullets.length; i++){
-		bullets[i].move();
+		var bullet = bullets[i];
+		//bullet.move();
 	}
 }
