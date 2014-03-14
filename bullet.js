@@ -7,11 +7,32 @@ function Bullet(player){
 	this.size = 2;
 }
 
+Bullet.prototype.location = function() {
+	return {x: this.x, y: this.y};
+}
+
 update_bullets = function() {
-	for (var i=0; i < myBullets.length; i++){
-		var b = myBullets[i];
+	$.each(myBullets, function(index, b) {
+
         var bullet = b.bullet;
         var ref = b.ref;
+		for (var player_index = 0; player_index < players.length; player_index++) {
+			var current_player = players[player_index];
+			var player_is_shot = false;
+
+			// don't shoot yourself
+			if (current_player.id == player.id) {
+				continue;
+			}
+			var current_player_location = {x: current_player.x, y: current_player.y};
+			var distance = get_distance(bullet.location(), current_player_location);
+
+			if (distance < 6) {
+                ref.remove();
+                delete bullet;
+                return true;
+			}
+		}
 
         bullet.x += bullet.speed * Math.cos(bullet.direction);
         bullet.y -= bullet.speed * Math.sin(bullet.direction);
@@ -19,16 +40,16 @@ update_bullets = function() {
         if (map.canMove(bullet.x, bullet.y)){
             ref.set(bullet);
         } else {
-            myBullets.splice(i, 1);
-            i--;
-            ref.remove()
+            ref.remove();
+            delete bullet;
+            return true;
         }
-	}
 
+	});
 }
 
 var setupBulletsFirebase = function() {
-	
+
 	bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
 
 	bulletsDataRef.on('child_added', function(snapshot){
