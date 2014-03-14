@@ -4,6 +4,7 @@ var Keys = {
     LEFT: 65, // a
     RIGHT: 68, // d
     SHOOT: 32, // space
+    BLARGH: 66, //b
 
     _pressed: {},
 
@@ -77,9 +78,6 @@ Player.prototype.update = function() {
             this.move(Math.PI);
         }
 
-    }
-    if (Keys.isDown(Keys.SHOOT)) {
-		playSound(Keys.SHOOT);
     }
 
 }
