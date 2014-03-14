@@ -55,7 +55,7 @@ function playerTalk(yelp_id, callback) {
 	});
 }
 
-/* Gets player's photo url and calls callback 
+/* Gets player's photo url and calls callback
  * playerPhoto('lukas', consoleLog)
  */
 function playerPhoto(yelp_id, callback) {
@@ -75,4 +75,11 @@ function playerPhoto(yelp_id, callback) {
 /* Log text to console */
 function consoleLog(text1, text2) {
 	console.log(text1, text2);
+}
+
+function get_distance(point1, point2) {
+	var delta_x = point1.x - point2.x;
+	var delta_y = point1.y - point2.y;
+
+	return Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
 }
