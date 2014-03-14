@@ -14,7 +14,7 @@ function Bullet(id, player){
 
 Bullet.prototype.update = function() {
 	this.x += this.speed * Math.cos(this.direction);
-	this.y += this.speed * Math.sin(this.direction);
+	this.y -= this.speed * Math.sin(this.direction);
 
 	if (map.canMove(this.x, this.y) != true){
 		bulletsDataRef.child(this.id).remove()
@@ -23,7 +23,7 @@ Bullet.prototype.update = function() {
 
 var setupBulletsFirebase = function() {
 	bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
-	
+
 	bulletsDataRef.on('child_added', function(snapshot){
 		bullets.push(snapshot.val());
 	});
