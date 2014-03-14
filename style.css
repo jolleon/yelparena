@@ -1,13 +1,13 @@
 body {
-    background-color: #faf8ef;
-    color: #776e65;
+    background-color: #030000;
+    color: #FFFBF5;
     font-family: 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 15px;
     text-align: center;
     margin: 0;
 }
 
-#name-prompt {
+.modal {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -15,11 +15,16 @@ body {
 	margin-top: -50px;
     height: 100px;
     width: 500px;
-    background-color: grey;
-	color: white;
-    border: none;
-    border-radius: 6px;
-    padding-top: 30px;
+}
+
+#name-prompt {
+    background-color: #3E3F41;
+	color: F7F7F7;
+	border: 6px solid #A19B88;
+	border-radius: 6px;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 #content canvas {
