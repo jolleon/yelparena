@@ -12,7 +12,6 @@ Bullet.prototype.location = function() {
 }
 
 update_bullets = function() {
-//	$.each(myBullets, function(index, b) {
 	for (var i = 0; i < myBullets.length; i++) {
 		var b = myBullets[i];
         var bullet = b.bullet;
@@ -40,7 +39,7 @@ update_bullets = function() {
 			myBullets.splice(i, 1);
 			i--;
 			delete b;
-			return true;
+			continue;
 		}
 
 
@@ -54,7 +53,6 @@ update_bullets = function() {
             delete b;
 			myBullets.splice(i, 1);
 			i--;
-            return true;
         }
 	}
 }
