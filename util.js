@@ -47,8 +47,11 @@ function playerTalk(yelp_id, callback) {
 		url: talkServiceUrl,
 		data: { yelp_id : yelp_id}
 	}).done(function(data) {
-		talkString = data['response'];
-		callback(talkString);
+		var talkString = '';
+		if (typeof(data.response) !== 'undefined') {
+			talkString = data['response'];
+		}
+		callback(yelp_id, talkString);
 	});
 }
 
@@ -61,12 +64,15 @@ function playerPhoto(yelp_id, callback) {
 		url: photoServiceUrl,
 		data: { yelp_id : yelp_id}
 	}).done(function(data) {
-		photoUrl = data[0]['photo_urls'][0];
-		callback(photoUrl);
+		var photoUrl = '';
+		if (data.length > 0) {
+			photoUrl = data[0]['photo_urls'][0];
+		}
+		callback(yelp_id, photoUrl);
 	});
 }
 
 /* Log text to console */
-function consoleLog(text) {
-	console.log(text);
+function consoleLog(text1, text2) {
+	console.log(text1, text2);
 }
