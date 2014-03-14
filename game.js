@@ -73,7 +73,7 @@ $(document).ready(function() {
 
     });
 
-    $('#name').focus();
+    $('#name-prompt input').focus();
     $('#name-prompt').submit(function(event) {
         event.preventDefault();
         name = $('#name-prompt input').val();

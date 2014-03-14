@@ -20,7 +20,7 @@ input {
 .modal {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 169px;
 	margin-left: -250px;
 	margin-top: -50px;
     height: 200px;
