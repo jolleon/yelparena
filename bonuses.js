@@ -42,6 +42,14 @@ apply_bonus = function(player, bonus){
 update_bonuses = function() {
     for (var i = 0; i < bonuses.length; i++){
         var bonus = bonuses[i];
+        bonus.alpha += 0.01 * bonus.alpha_dir;
+        if (bonus.alpha < 0.2){
+            bonus.alpha = 0.2;
+            bonus.alpha_dir = 1;
+        } else if (bonus.alpha > 1) {
+            bonus.alpha = 1;
+            bonus.alpha_dir = -1;
+        }
         if (get_distance(player, bonus) < 20){
             console.log(player, bonus);
             apply_bonus(player, bonus);
@@ -58,6 +66,8 @@ setupBonuses = function() {
     bonusesDataRef.on('child_added', function(snapshot){
         var new_bonus = snapshot.val();
         new_bonus.id = snapshot.name();
+        new_bonus.alpha = 0;
+        new_bonus.alpha_dir = 1;
         bonuses.push(new_bonus);
     });
     bonusesDataRef.on('child_removed', function(snapshot){
@@ -77,22 +87,23 @@ drawBonuses = function() {
         var text = '?';
         
         if (bonus.type == 'health'){
-            color = 'rgba(0,255,0,1)';
+            color = '#0f0';
             text = 'H';
         }
         else if (bonus.type == 'player_speed'){
-            color = 'rgba(255,255,0,1)';
+            color = '#ff0';
             text = 'S';
         }
         else if (bonus.type == 'weapon'){
-            color = 'rgba(255,0,255,1)';
+            color = '#f0f';
             text = 'W';
         }
         else if (bonus.type == 'damage'){
-            color = 'rgba(255,0,0,1)';
+            color = '#f00';
             text = 'D';
         }
         
+        color = hexToRgba(color, bonus.alpha);
         var rad = ctx.createRadialGradient(
             bonus.x, bonus.y, 0,
             bonus.x, bonus.y, bSize)
