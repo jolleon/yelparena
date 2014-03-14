@@ -3,10 +3,11 @@
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
 </head>
 <body>
-    <div id="name-prompt">
-        Name <input type="text"><br>
-        <button>Join!</button>
-    </div>
+    <form id="name-prompt">
+        <label for="name-prompt" >Name</label>
+        <input type="text" id="name"><br>
+        <input type="submit" value="Join!">
+    </form>
     <table>
         <tr>
             <td rowspan=2>
@@ -14,6 +15,9 @@
                     <canvas id="main" width=800 height=600>
                     Your browser sucks.
                     </canvas>
+                </div>
+                <div id="message">
+                	HELLO
                 </div>
             </td>
             <td>
@@ -44,4 +48,5 @@
 <script type="text/javascript" src="update.js"></script>
 <script type="text/javascript" src="map.js"></script>
 <script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="sounds.js"></script>
 

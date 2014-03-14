@@ -6,6 +6,7 @@ var updateGame = function() {
 		var bullet = new Bullet(player);
         newBulletDataRef.set(bullet);
         myBullets.push({ref: newBulletDataRef, bullet:bullet});
+		playSound(Keys.SHOOT);
 	}
 
 	// move locally created bullets

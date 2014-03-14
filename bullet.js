@@ -2,7 +2,7 @@ function Bullet(player){
 	this.x = player.x;
 	this.y = player.y;
 	this.color = player.color; //pick cool bullet color
-	this.speed = 1; // no idea what's appropriate here
+	this.speed = 3;
 	this.direction = player.direction;
 	this.size = 2;
 }
@@ -14,7 +14,7 @@ update_bullets = function() {
         var ref = b.ref;
 
         bullet.x += bullet.speed * Math.cos(bullet.direction);
-        bullet.y += bullet.speed * Math.sin(bullet.direction);
+        bullet.y -= bullet.speed * Math.sin(bullet.direction);
 
         if (map.canMove(bullet.x, bullet.y)){
             ref.set(bullet);
@@ -29,7 +29,8 @@ update_bullets = function() {
 
 var setupBulletsFirebase = function() {
 	
-    bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
+	bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
+
 	bulletsDataRef.on('child_added', function(snapshot){
         var new_bullet = snapshot.val();
         new_bullet.id = snapshot.name();

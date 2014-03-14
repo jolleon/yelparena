@@ -63,20 +63,23 @@ $(document).ready(function() {
     bullets = [];
     myBullets = [];
 
-    mapDataRef.on('value', function(snapshot){
+    mapDataRef.on('value', function(snapshot) {
         map_dimensions = snapshot.val();
         resizeCanvas(map_dimensions.x, map_dimensions.y);
         clearCanvas();
 
     });
 
-    $('#name-prompt button').click(function(e){
+    $('#name').focus();
+    $('#name-prompt').submit(function(event) {
+        event.preventDefault();
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
 
         setupPlayersFirebase();
         setupBulletsFirebase();
         createPlayer(name);
+
         // start the loop
         startAnimation();
 

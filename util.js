@@ -1,3 +1,6 @@
+var talkServiceUrl = 'http://lukas.dev.yelp.com:7777/yelployees/talk';
+var photoServiceUrl = 'http://lukas.dev.yelp.com:7777/yelployees';
+
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -33,4 +36,37 @@ function randomBrightColor() {
     color += letters[g];
     color += letters[b];
     return color;
+}
+
+/* Gets talk string and calls callback
+ * playerTalk('lukas', consoleLog)
+ */
+function playerTalk(yelp_id, callback) {
+	$.ajax({
+		type: 'GET',
+		url: talkServiceUrl,
+		data: { yelp_id : yelp_id}
+	}).done(function(data) {
+		talkString = data['response'];
+		callback(talkString);
+	});
+}
+
+/* Gets player's photo url and calls callback 
+ * playerPhoto('lukas', consoleLog)
+ */
+function playerPhoto(yelp_id, callback) {
+	$.ajax({
+		type: 'GET',
+		url: photoServiceUrl,
+		data: { yelp_id : yelp_id}
+	}).done(function(data) {
+		photoUrl = data[0]['photo_urls'][0];
+		callback(photoUrl);
+	});
+}
+
+/* Log text to console */
+function consoleLog(text) {
+	console.log(text);
 }
