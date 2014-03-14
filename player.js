@@ -87,11 +87,11 @@ var setupPlayersFirebase = function() {
     playersDataRef.on('child_added', function(snapshot){
         var new_player = snapshot.val();
         new_player.id = snapshot.name();
-        $('#feed').append(new_player.name + ' joined<br>');
+        $('#feed').append('<span style="color:' + new_player.color + '">' + new_player.name + ' joined</span><br>');
         players.push(new_player);
     });
     playersDataRef.on('child_removed', function(snapshot){
-        $('#feed').append(snapshot.val().name + ' left<br>');
+        $('#feed').append('<span style="color:' + snapshot.val().color + '">' + snapshot.val().name + ' left</span><br>');
         // ok this is retarted but js is even more retarted
         for (var i=0; i<players.length; i++){
             if (players[i].id == snapshot.name()){
