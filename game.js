@@ -43,6 +43,10 @@ var startAnimation = function(){
     }
 };
 
+var fight = function() {
+	$('.fight').css('opacity', '1');
+}
+
 
 var mainloop = function(){
     updateGame();
@@ -78,6 +82,7 @@ $(document).ready(function() {
         event.preventDefault();
         name = $('#name-prompt input').val();
         $('.modal').attr('style', 'display:none');
+		fight();
 
         setupPlayersFirebase();
         setupBulletsFirebase();
