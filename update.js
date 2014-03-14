@@ -26,6 +26,11 @@ function updateMessageSpanText(user_id, text) {
 }
 
 function updateScoreFeed() {
+
+	players.sort(function(a,b){
+		return b.score - a.score;
+	})
+
 	$('#scores').empty();
 	for (var i=0; i<players.length; i++){
 		var player = players[i];
