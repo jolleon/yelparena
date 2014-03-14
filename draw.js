@@ -25,7 +25,11 @@ var drawGame = function() {
         var p = players[i];
         drawPlayer(p);
     }
-
+	for(var i=0; i<bullets.length; i++){
+		var b = bullets[i];
+		ctx.fillStyle = b.color;
+		ctx.fillRect(b.x - 5, b.y - 5, b.size, b.size);
+	}
 }
 
 var drawMap = function() {

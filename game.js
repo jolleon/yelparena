@@ -60,6 +60,7 @@ $(document).ready(function() {
     mapDataRef = new Firebase(firebaseUrl + 'map');
     map_dimensions = {'x': 0, 'y': 0};
     players = [];
+	bullets = [];
 
     mapDataRef.on('value', function(snapshot){
         map_dimensions = snapshot.val();
@@ -67,6 +68,7 @@ $(document).ready(function() {
         clearCanvas();
 
     });
+	setupBulletsFirebase();
 
     $('#name-prompt button').click(function(e){
         name = $('#name-prompt input').val();
