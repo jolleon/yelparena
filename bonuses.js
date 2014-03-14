@@ -26,6 +26,9 @@ apply_bonus = function(player, bonus){
     }
     else if (bonus.type == 'player_speed'){
         player.speed *= 1.15;
+        if (player.speed > 7){
+            player.speed = 7;
+        }
     }
     else if (bonus.type == 'weapon'){
         player.weapon += 1;
