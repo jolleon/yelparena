@@ -46,11 +46,19 @@ var drawGame = function() {
         var p = players[i];
         drawPlayer(p);
     }
+    drawBullets();
+}
+
+var drawBullets = function() {
 	for(var i=0; i<bullets.length; i++){
 		var b = bullets[i];
-		ctx.fillStyle = b.color;
-		ctx.fillRect(b.x - b.size / 2, b.y - b.size / 2, b.size, b.size);
+        var rad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.size/2 + 1);
+        rad.addColorStop(0.8, b.color);
+        rad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = rad;
+        ctx.fillRect(b.x - b.size, b.y - b.size, 2 * b.size, 2 * b.size);
 	}
+
 }
 
 var drawMap = function() {
