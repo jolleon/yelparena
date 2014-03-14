@@ -59,8 +59,39 @@ var drawMap = function() {
 	var game_block_dimensions = map.game_block_dimensions();
 	var map_block_coordinates = map.map_block_coordinates();
 
+    // to draw big squares in background
+    var big_square_width = 50;
+    for (var x = 0; x < canvas.width / big_square_width; x++){
+        for (var y = 0; y < canvas.height / big_square_width; y++){
+            if ((x+y) % 2){
+                ctx.fillStyle = '#111';
+            } else {
+                ctx.fillStyle = '#222';
+            }
+            ctx.fillRect(
+                big_square_width * x,
+                big_square_width * y,
+                big_square_width * (x+1),
+                big_square_width * (y+1)
+            );
+        }
+    }
+
 	for (var i = 0; i < map_block_coordinates.length; i++) {
 		var point = map_block_coordinates[i];
-		ctx.fillRect(point.x, point.y, game_block_dimensions.width, game_block_dimensions.height);
+
+        var grad = ctx.createLinearGradient(
+            Math.round(point.x),
+            Math.round(point.y),
+            Math.round(point.x) + Math.round(game_block_dimensions.width),
+            Math.round(point.y) + Math.round(game_block_dimensions.height));
+        grad.addColorStop(0, '#ddd');
+        grad.addColorStop(1, '#333');
+        ctx.fillStyle = grad;
+        ctx.fillRect(
+            Math.round(point.x),
+            Math.round(point.y),
+            Math.round(game_block_dimensions.width),
+            Math.round(game_block_dimensions.height));
 	}
 }
