@@ -104,10 +104,6 @@ Player.prototype.update = function() {
 
 }
 
-Player.prototype.is_shot = function() {
-	alert('waaaaaaaaaht');
-}
-
 var setupPlayersFirebase = function() {
 
     playersDataRef = new Firebase(firebaseUrl + 'players');
