@@ -53,6 +53,7 @@ Player = function(name, id){
 	this.id = id;
     this.health = 10;
 	this.weapon = Weapons.PISTOL;
+	this.bulletSize = 3;
 }
 
 Player.prototype.move = function(direction) {

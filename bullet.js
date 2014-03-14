@@ -6,7 +6,7 @@ function Bullet(player, direction_radians, rotation_offset, rotation_distance){
 	this.color = player.color; //pick cool bullet color
 	this.speed = 3;
 	this.direction = player.direction + direction_radians;
-	this.size = 3;
+	this.size = player.bulletSize;
 }
 
 Bullet.prototype.location = function() {
@@ -35,6 +35,9 @@ update_my_bullets = function() {
 			}
 		}
 		if (playerHit) {
+            player.score += 1;
+            localPlayerDataRef.set(player);
+
             hitsDataRef.push({from: player.id, to: playerHit.id, size: myBullets[i].bullet.size});
             ref.remove();
 			myBullets.splice(i, 1);
