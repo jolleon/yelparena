@@ -2,7 +2,7 @@
 var updateGame = function() {
     
 	if(Keys.isDown(Keys.SHOOT)) {
-		var bullet = new Bullet(bullets.length, player.x, player.y, player.name);
+		var bullet = new Bullet(bullets.length, player);
 	}
 
 	// move every buillet on screen
