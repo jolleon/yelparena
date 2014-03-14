@@ -70,6 +70,7 @@ $(document).ready(function() {
     });
 	setupBulletsFirebase();
 
+    $('#name').focus();
     $('#name-prompt').submit(function(event) {
         event.preventDefault();
         name = $('#name-prompt input').val();
