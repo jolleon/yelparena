@@ -78,6 +78,9 @@ Player.prototype.update = function() {
         }
 
     }
+    if (Keys.isDown(Keys.SHOOT)) {
+		playSound(Keys.SHOOT);
+    }
 
 }
 
