@@ -109,7 +109,6 @@ Map.prototype.newPlayerCoordinates = function() {
     var y = (Math.random()*1000) % map_dimensions.y;
     var playerSize = 8;		// keep player a good enough distance away from wall
     
-    console.log("X: " + x + ", Y: " + y);
     while ((map.canMove(x+playerSize, y+playerSize) == false) ||
     	   (map.canMove(x-playerSize, y-playerSize) == false) ||
   		   (map.canMove(x+playerSize, y-playerSize) == false) ||
@@ -117,8 +116,6 @@ Map.prototype.newPlayerCoordinates = function() {
     	
     	x = (Math.random()*1000) % map_dimensions.x;
     	y = (Math.random()*1000) % map_dimensions.y;
-    	
-    	console.log("MAP.JS: CAN NOT MOVE, *NEW* X: " + x + ", Y: " + y);
     }	
     
     var point = {'x': x, 'y': y};

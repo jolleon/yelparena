@@ -53,6 +53,7 @@ Player = function(name, id){
 	this.id = id;
     this.health = 10;
 	this.weapon = Weapons.PISTOL;
+	this.bulletSize = 3;
 }
 
 Player.prototype.move = function(direction) {
@@ -155,6 +156,7 @@ Player.prototype.update = function() {
         this.x = respawnCoords.x;
         this.y = respawnCoords.y;
         this.health = 10;
+        this.bulletSize = 3;
     }
 
     localPlayerDataRef.set(player);
