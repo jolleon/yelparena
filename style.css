@@ -11,6 +11,12 @@ input {
 	font-size: 15px;
 }
 
+.right {
+	position: absolute;
+	top: 0px;
+	left: 1050px;
+}
+
 .modal {
     position: absolute;
     left: 50%;

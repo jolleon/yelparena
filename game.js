@@ -77,7 +77,7 @@ $(document).ready(function() {
     $('#name-prompt').submit(function(event) {
         event.preventDefault();
         name = $('#name-prompt input').val();
-        $('#name-prompt').attr('style', 'display:none');
+        $('.modal').attr('style', 'display:none');
 
         setupPlayersFirebase();
         setupBulletsFirebase();
