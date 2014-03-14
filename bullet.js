@@ -14,7 +14,7 @@ function Bullet(id, player){
 
 Bullet.prototype.update = function() {
 	this.x += this.speed * Math.cos(this.direction);
-	this.y += this.speed * Math.sin(this.direction);
+	this.y -= this.speed * Math.sin(this.direction);
 
 	if (map.canMove(this.x, this.y) != true){
 		bulletsDataRef.child(this.id).remove()

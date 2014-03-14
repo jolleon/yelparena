@@ -34,6 +34,7 @@ Player = function(name){
     this.y = map_dimensions.y / 2;
     this.direction = 0;
     this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
+	this.hit_counter = 0;
 }
 
 
@@ -77,9 +78,37 @@ Player.prototype.update = function() {
         else if (Keys.isDown(Keys.LEFT)) {
             this.move(Math.PI);
         }
+	}
+	if(Keys.isDown(Keys.SHOOT)) {
+			this.shoot();
+	}
 
-    }
+	if (this.isHit()){
+		 // do something
+	}	
+	if (this.hit_counter != 0){
+		this.hit_counter -= 1;
+	}
+}
 
+Player.prototype.isHit = function() {
+	var player_map_coord = map.convert_game_to_map_coordinates(this.x, this.y);
+	for(var i=0; i<bullets.length; i++){
+		var bullet = bullets[i];
+		var bullet_map_coord = map.convert_game_to_map_coordinates(bullet.x, bullet.y);
+		if (bullet.player_name != this.name){
+			if (bullet_map_coord.x == player_map_coord.x && bullet_map_coord.y == player_map_coord.y){
+				bulletsDataRef.child(this.id).remove();
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+Player.prototype.shoot = function() {
+	var bullet = new Bullet(bullets.length, player);
+	player.hit_counter = 10;
 }
 
 var setupPlayersFirebase = function() {

@@ -68,12 +68,12 @@ $(document).ready(function() {
         clearCanvas();
 
     });
-	setupBulletsFirebase();
-
+	
     $('#name-prompt button').click(function(e){
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
 
+		setupBulletsFirebase();
         setupPlayersFirebase();
         createPlayer(name);
         // start the loop
