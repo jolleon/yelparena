@@ -1,23 +1,78 @@
 body {
-    background-color: black;
-    color: white;
-    font-family: "Lucida Console";
-    text-align: center;
+    background-color: #030000;
     margin: 0;
+    color: #FFFBF5;
+    font-family: 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+}
+
+input {
+    font-family: 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+}
+
+.right {
+	position: absolute;
+	top: 0px;
+	left: 1050px;
+}
+
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+	margin-left: -250px;
+	margin-top: -50px;
+    height: 200px;
+    width: 500px;
+}
+
+.message-box {
+	width: 100%;
+	height: 100%;
+	display: block;
+    background-color: #3E3F41;
+	color: F7F7F7;
+	border: 6px solid #A19B88;
+	border-radius: 6px;
+	display: block;
+}
+
+.message-box h1 {
+	padding-top: 15px;
+	text-align: center;
+}
+
+.input-box {
+	background-color: #F7F7F7;
+	border-radius: 6px;
+	border: 6px solid #A19B88;
+	display: block;
+	width: 250px;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
 }
 
 #name-prompt {
-    position: absolute;
-    left: 400px;
-    top: 300px;
-    height: 100px;
-    width: 500px;
-    background-color: #333;
-    border: solid 3px white;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    padding-top: 30px;
+	line-height: 38px;
+}
+
+#name-prompt label {
+	color: #2C2918;
+	font-weight: bold;
+	padding-left: 8px;
+}
+
+#name-prompt input {
+	background-color: transparent;
+	border: none;
+	padding-left: 8px;
+}
+
+#name-prompt input:focus {
+	outline: 0;
 }
 
 #content canvas {
