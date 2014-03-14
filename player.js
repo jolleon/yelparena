@@ -111,11 +111,13 @@ var setupPlayersFirebase = function() {
     playersDataRef.on('child_added', function(snapshot){
         var new_player = snapshot.val();
         new_player.id = snapshot.name();
-        $('#feed').append('<span style="color:' + new_player.color + '">' + new_player.name + ' joined</span><br>');
+		limitFeedLength()
+		$('#feed').append('<div><span style="color:' + new_player.color + '">' + new_player.name + ' joined</span><br></div>');
         players.push(new_player);
     });
     playersDataRef.on('child_removed', function(snapshot){
-        $('#feed').append('<span style="color:' + snapshot.val().color + '">' + snapshot.val().name + ' left</span><br>');
+      	limitFeedLength()
+		$('#feed').append('<div><span style="color:' + snapshot.val().color + '">' + snapshot.val().name + ' left</span><br></div>');
         // ok this is retarted but js is even more retarted
         for (var i=0; i<players.length; i++){
             if (players[i].id == snapshot.name()){
@@ -145,6 +147,11 @@ var setupPlayersFirebase = function() {
     });
 }
 
+var limitFeedLength = function() {
+	while($('#feed > div').length > 9){
+		$('#feed > div').first().remove()	
+	}
+}
 
 var createPlayer = function(name) {
     localPlayerDataRef = playersDataRef.push();
