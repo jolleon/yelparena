@@ -14,6 +14,7 @@ var drawPlayer = function(p) {
     ctx.fillRect(p.x - pSize, p.y - pSize, 2 * pSize, 2 * pSize);
 
     // name
+    ctx.fillStyle = p.color;
     ctx.fillText(p.name, p.x-15, p.y+15)
 
     // draw gun
