@@ -32,8 +32,16 @@ function updateScoreFeed() {
 	})
 
 	$('#scores').empty();
-	for (var i=0; i<players.length; i++){
-		var player = players[i];
+	var player_displayed = false;
+	var display_len = Math.min(10, players.length);
+	for (var i=0; i<display_len; i++){
+		var cur_player = players[i];
+		if(player && cur_player.name == player.name){
+			player_displayed = true;
+		}
+	 	$('#scores').append('<span style="color:' + cur_player.color + '">' + cur_player.name + ': ' + cur_player.score + ' </span><br>');
+	}
+	if(player && !player_displayed){
 	 	$('#scores').append('<span style="color:' + player.color + '">' + player.name + ': ' + player.score + ' </span><br>');
 	}
 }

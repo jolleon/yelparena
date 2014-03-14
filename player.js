@@ -74,7 +74,10 @@ Player.prototype.move = function(direction) {
         this.y = y;
     }
 
-    localPlayerDataRef.set(player);
+	// only update sometimes
+	if (loop_counter % 10 == 0) {
+		localPlayerDataRef.set(player);
+	};
 }
 
 Player.prototype.can_shoot = function() {
@@ -92,6 +95,7 @@ Player.prototype.shoot = function() {
 
 	if (this.weapon === Weapons.PISTOL) {
 		var newBulletDataRef = bulletsDataRef.push();
+        newBulletDataRef.onDisconnect().remove();
 		var bullet = new Bullet(player, 0, 0, 0);
 		newBulletDataRef.set(bullet);
 		myBullets.push({ref: newBulletDataRef, bullet:bullet});
@@ -99,14 +103,16 @@ Player.prototype.shoot = function() {
 		var derp_offsets = [-Math.PI/2, Math.PI/2];
 		$.each(derp_offsets, function(index, offset){
 			var newBulletDataRef = bulletsDataRef.push();
+            newBulletDataRef.onDisconnect().remove();
 			var bullet = new Bullet(player, 0, offset, 3);
 			newBulletDataRef.set(bullet);
 			myBullets.push({ref: newBulletDataRef, bullet:bullet});
 		});
-	} else if (this.weapon === Weapons.SPREAD) {
+	} else if (this.weapon >= Weapons.SPREAD) {
 		var direction_offsets = [-0.1, 0, 0.1];
 		$.each(direction_offsets, function(index, offset){
 			var newBulletDataRef = bulletsDataRef.push();
+            newBulletDataRef.onDisconnect().remove();
 			var bullet = new Bullet(player, offset, 0, 0);
 			newBulletDataRef.set(bullet);
 			myBullets.push({ref: newBulletDataRef, bullet:bullet});
@@ -161,11 +167,13 @@ var setupPlayersFirebase = function() {
     playersDataRef.on('child_added', function(snapshot){
         var new_player = snapshot.val();
         new_player.id = snapshot.name();
-        $('#feed').append('<span style="color:' + new_player.color + '">' + new_player.name + ' joined</span><br>');
+		limitFeedLength()
+		$('#feed').append('<div><span style="color:' + new_player.color + '">' + new_player.name + ' joined</span><br></div>');
         players.push(new_player);
     });
     playersDataRef.on('child_removed', function(snapshot){
-        $('#feed').append('<span style="color:' + snapshot.val().color + '">' + snapshot.val().name + ' left</span><br>');
+      	limitFeedLength()
+		$('#feed').append('<div><span style="color:' + snapshot.val().color + '">' + snapshot.val().name + ' left</span><br></div>');
         // ok this is retarted but js is even more retarted
         for (var i=0; i<players.length; i++){
             if (players[i].id == snapshot.name()){
@@ -195,6 +203,11 @@ var setupPlayersFirebase = function() {
     });
 }
 
+var limitFeedLength = function() {
+	while($('#feed > div').length > 9){
+		$('#feed > div').first().remove()
+	}
+}
 
 var createPlayer = function(name) {
     localPlayerDataRef = playersDataRef.push();
