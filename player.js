@@ -33,9 +33,8 @@ Player = function(name){
     this.x = map_dimensions.x / 2;
     this.y = map_dimensions.y / 2;
     this.direction = 0;
-    this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
+    this.color = randomBrightColor();
 }
-
 
 Player.prototype.move = function(direction) {
     var speed = 1;
