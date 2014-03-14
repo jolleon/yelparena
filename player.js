@@ -56,11 +56,8 @@ Player = function(name, id){
 	this.bulletSize = 3;
 }
 
-Player.prototype.move = function(direction) {
-    var x = this.x + this.speed * Math.cos(direction);
-    var y = this.y - this.speed * Math.sin(direction);
-    this.direction = direction;
 
+Player.prototype.try_to_move = function(x, y){
     var playerSize = 8; // margin so that you can't be too close to a wall
     var max_x = x + playerSize;
     var max_y = y + playerSize;
@@ -73,7 +70,25 @@ Player.prototype.move = function(direction) {
          map.canMove(min_x, max_y)) {
         this.x = x;
         this.y = y;
+        return true;
     }
+    return false;
+}
+
+Player.prototype.move = function(direction) {
+    this.direction = direction;
+
+    var x = this.x + this.speed * Math.cos(direction);
+    var y = this.y - this.speed * Math.sin(direction);
+
+    moved = this.try_to_move(x, y);
+    if (!moved){
+        moved = this.try_to_move(this.x, y);
+    }
+    if (!moved){
+        moved = this.try_to_move(x, this.y);
+    }
+
 
 	// only update sometimes
 	if (loop_counter % 10 == 0) {
