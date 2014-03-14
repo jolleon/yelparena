@@ -24,8 +24,26 @@ body {
     border: 5px solid #999;
 }
 
+#scores{
+	width: 200px;
+	padding-bottom: 30px;
+}
+
 #feed{
     width: 200px;
+}
+
+#messageSpan {
+	color: red;
+	padding: 5px;
+	padding-top: 5px;
+	width: 500px;
+}
+
+#photoSpan {
+	color: red;
+	padding: 5px;
+	padding-top: 5px;
 }
 
 .p0 {

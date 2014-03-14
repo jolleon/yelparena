@@ -4,6 +4,7 @@ var Keys = {
     LEFT: 65, // a
     RIGHT: 68, // d
     SHOOT: 32, // space
+    SIM_IRC: 66, //b
 
     _pressed: {},
 
@@ -32,7 +33,7 @@ var Keys = {
     }
 };
 
-Player = function(name){
+Player = function(name, id){
     this.name = name;
     this.score = 0;
     this.speed = 1;
@@ -40,6 +41,8 @@ Player = function(name){
     this.y = map_dimensions.y / 2;
     this.direction = 0;
     this.color = randomBrightColor();
+	this.id = id;
+    this.health = 10;
 }
 
 Player.prototype.move = function(direction) {
@@ -99,6 +102,7 @@ Player.prototype.update = function() {
             this.move(Math.PI);
         }
     }
+
 }
 
 var setupPlayersFirebase = function() {
@@ -127,12 +131,25 @@ var setupPlayersFirebase = function() {
             }
         }
     });
+
+
+    // tracking when my player is hit
+    hitsDataRef = new Firebase(firebaseUrl + 'hits');
+    hitsDataRef.on('child_added', function(snapshot){
+        if (snapshot.val().to == player.id) {
+            // ouch, got hit!
+            player.health -= snapshot.val().size;
+            localPlayerDataRef.set(player);
+            hitsDataRef.child(snapshot.name()).remove();
+        }
+    });
 }
 
 
 var createPlayer = function(name) {
     localPlayerDataRef = playersDataRef.push();
     localPlayerDataRef.onDisconnect().remove();
-    player = new Player(name);
+	player_id = localPlayerDataRef.name();
+    player = new Player(name, player_id);
     localPlayerDataRef.set(player);
 }

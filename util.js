@@ -42,20 +42,30 @@ function randomBrightColor() {
  * playerTalk('lukas', consoleLog)
  */
 function playerTalk(yelp_id, callback) {
-	$.ajax({
-		type: 'GET',
-		url: talkServiceUrl,
-		data: { yelp_id : yelp_id}
-	}).done(function(data) {
-		var talkString = '';
-		if (typeof(data.response) !== 'undefined') {
-			talkString = data['response'];
+	var text = ':(';
+	var tries = 5;
+	for (var i = 0; i < tries; i++) {
+		$.ajax({
+			type: 'GET',
+			url: talkServiceUrl,
+			data: { yelp_id : yelp_id},
+			async: false
+		}).done(function(data) {
+			var talkString = '';
+			if (typeof(data.response) !== 'undefined') {
+				if ((data['response'].indexOf('http') === -1) && (data['response'].length < 120)) {
+					text = data['response'];
+				}
+			}
+		});
+		if (text !== ':(') {
+			break;
 		}
-		callback(yelp_id, talkString);
-	});
+	}
+	callback(yelp_id, text);
 }
 
-/* Gets player's photo url and calls callback 
+/* Gets player's photo url and calls callback
  * playerPhoto('lukas', consoleLog)
  */
 function playerPhoto(yelp_id, callback) {
@@ -75,4 +85,11 @@ function playerPhoto(yelp_id, callback) {
 /* Log text to console */
 function consoleLog(text1, text2) {
 	console.log(text1, text2);
+}
+
+function get_distance(point1, point2) {
+	var delta_x = point1.x - point2.x;
+	var delta_y = point1.y - point2.y;
+
+	return Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
 }
