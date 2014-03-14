@@ -16,11 +16,8 @@ update_bullets = function() {
 		var b = myBullets[i];
         var bullet = b.bullet;
         var ref = b.ref;
-		var bullet_is_used = false;
+		var playerHit = false;
 		for (var player_index = 0; player_index < players.length; player_index++) {
-			if (bullet_is_used === true) {
-				continue;
-			}
 			var current_player = players[player_index];
 
 			// don't shoot yourself
@@ -31,14 +28,16 @@ update_bullets = function() {
 			var distance = get_distance(bullet.location(), current_player_location);
 
 			if (distance < 6) {
-				bullet_is_used = true;
+				playerHit = current_player.name;
 			}
 		}
-		if (bullet_is_used === true) {
+		if (playerHit) {
             ref.remove();
 			myBullets.splice(i, 1);
 			i--;
 			delete b;
+            playerPhoto(playerHit, updateMessageSpanPhoto);
+            playerTalk(playerHit, updateMessageSpanText);
 			continue;
 		}
 
