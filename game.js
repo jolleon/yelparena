@@ -62,7 +62,7 @@ $(document).ready(function() {
     players = [];
 	bullets = [];
 
-    mapDataRef.on('value', function(snapshot){
+    mapDataRef.on('value', function(snapshot) {
         map_dimensions = snapshot.val();
         resizeCanvas(map_dimensions.x, map_dimensions.y);
         clearCanvas();
@@ -70,18 +70,20 @@ $(document).ready(function() {
     });
 	setupBulletsFirebase();
 
-    $('#name-prompt button').click(function(e){
+    $('#name-prompt').submit(function(event) {
+        event.preventDefault();
         name = $('#name-prompt input').val();
         $('#name-prompt').attr('style', 'display:none');
 
         setupPlayersFirebase();
         createPlayer(name);
-        // start the loop
-        startAnimation();
-
-        // listen to key press
-        window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
-        window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
     });
+
+    // start the loop
+    startAnimation();
+
+    // listen to key press
+    window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
+    window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
 
 });
