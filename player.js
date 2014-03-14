@@ -151,10 +151,7 @@ Player.prototype.update = function() {
     }
 
     if (this.health <= 0) {
-        var respawnCoords = map.newPlayerCoordinates();
-        this.x = respawnCoords.x;
-        this.y = respawnCoords.y;
-        this.health = 10;
+        player = new Player(player.name, player.id);
     }
 
     localPlayerDataRef.set(player);
