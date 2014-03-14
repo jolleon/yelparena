@@ -77,13 +77,13 @@ $(document).ready(function() {
 
         setupPlayersFirebase();
         createPlayer(name);
+
+        // start the loop
+        startAnimation();
+
+        // listen to key press
+        window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
+        window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
     });
-
-    // start the loop
-    startAnimation();
-
-    // listen to key press
-    window.addEventListener('keyup', function(event){Keys.onKeyup(event);}, false);
-    window.addEventListener('keydown', function(event){Keys.onKeydown(event);}, false);
 
 });
