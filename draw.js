@@ -40,7 +40,7 @@ var drawGame = function() {
 	for(var i=0; i<bullets.length; i++){
 		var b = bullets[i];
 		ctx.fillStyle = b.color;
-		ctx.fillRect(b.x - 5, b.y - 5, b.size, b.size);
+		ctx.fillRect(b.x - b.size / 2, b.y - b.size / 2, b.size, b.size);
 	}
 }
 

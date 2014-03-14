@@ -4,7 +4,7 @@ function Bullet(player){
 	this.color = player.color; //pick cool bullet color
 	this.speed = 3;
 	this.direction = player.direction;
-	this.size = 2;
+	this.size = 3;
 }
 
 Bullet.prototype.location = function() {
