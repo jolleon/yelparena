@@ -1,5 +1,5 @@
 function Map (game_height, game_width) {
-	this.array = [
+	this.unscaled_array = [
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -24,6 +24,22 @@ function Map (game_height, game_width) {
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	]
+
+	var scale_factor = 3;
+
+	this.array = [];
+	for (var row_index = 0; row_index < this.unscaled_array.length; row_index++) {
+		var new_row = [];
+		var current_row = this.unscaled_array[row_index];
+		for (var i = 0; i < current_row.length; i++) {
+			for (var scale = 0; scale < scale_factor; scale++) {
+				new_row.push(current_row[i]);
+			}
+		}
+		for (var scale = 0; scale < scale_factor; scale++) {
+			this.array.push(new_row);
+		}
+	}
 
 	this.map_height = this.array.length;
 	this.map_width = this.array[0].length;
