@@ -103,7 +103,7 @@ Player.prototype.shoot = function() {
 			newBulletDataRef.set(bullet);
 			myBullets.push({ref: newBulletDataRef, bullet:bullet});
 		});
-	} else if (this.weapon === Weapons.SPREAD) {
+	} else if (this.weapon >= Weapons.SPREAD) {
 		var direction_offsets = [-0.1, 0, 0.1];
 		$.each(direction_offsets, function(index, offset){
 			var newBulletDataRef = bulletsDataRef.push();
