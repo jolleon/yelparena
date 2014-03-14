@@ -2,15 +2,25 @@ var drawPlayer = function(p) {
     var pSize = 10;
     var pRadius = pSize / 2;
     var gunLength = pRadius + 5;
-    ctx.fillStyle = p.color;
-    ctx.fillRect(p.x - pRadius, p.y - pRadius, pSize, pSize);
+
+    // glow
+    var rad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, pRadius + 4);
+    rad.addColorStop(0, 'rgba(50, 50, 50, 0.5)');
+    rad.addColorStop(0.4, p.color);
+    rad.addColorStop(0.5, p.color);
+    rad.addColorStop(0.8, 'rgba(255, 255, 255, 0.2)');
+    rad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = rad;
+    ctx.fillRect(p.x - pSize, p.y - pSize, 2 * pSize, 2 * pSize);
+
+    // name
     ctx.fillText(p.name, p.x-15, p.y+15)
 
     // draw gun
     ctx.strokeStyle = p.color;
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(p.x + pRadius * Math.cos(p.direction), p.y - pRadius * Math.sin(p.direction));
     ctx.lineTo(p.x + gunLength * Math.cos(p.direction), p.y - gunLength * Math.sin(p.direction));
     ctx.stroke();
 
