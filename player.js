@@ -1,29 +1,33 @@
 var maxBullets = 10;
 
 var Keys = {
-    UP: 87, // w
-    DOWN: 83, // s
-    LEFT: 65, // a
-    RIGHT: 68, // d
-    SHOOT: 32, // space
-    SIM_IRC: 66, //b
+    UP: [87, 38], // w
+    DOWN: [83, 40], // s
+    LEFT: [65, 37], // a
+    RIGHT: [68, 39], // d
+    SHOOT: [32, 32], // space
+    SIM_IRC: [66, 66], //b
 
     _pressed: {},
 
     isDown: function(keyCode) {
-        return this._pressed[keyCode];
+        return this._pressed[keyCode[0]] || this._pressed[keyCode[1]];
     },
 
     isMoving: function() {
-        return this._pressed[this.UP] ||
-            this._pressed[this.DOWN] ||
-            this._pressed[this.LEFT] ||
-            this._pressed[this.RIGHT];
+        return this._pressed[this.UP[0]] ||
+            this._pressed[this.DOWN[0]] ||
+            this._pressed[this.LEFT[0]] ||
+            this._pressed[this.RIGHT[0]] ||
+            this._pressed[this.UP[1]] ||
+            this._pressed[this.DOWN[1]] ||
+            this._pressed[this.LEFT[1]] ||
+            this._pressed[this.RIGHT[1]];
     },
 
     onKeydown: function(event) {
 		// can only shoot once for each keyDown event
-		if ((event.keyCode == this.SHOOT) && (this._pressed[this.SHOOT] !== true)) {
+		if ((event.keyCode == this.SHOOT[0]) && (this.isDown(this.SHOOT) !== true)) {
 			player.shoot();
 		}
 
