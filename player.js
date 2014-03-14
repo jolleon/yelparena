@@ -91,8 +91,6 @@ Player.prototype.update = function() {
         }
     }
 
-
-
 }
 
 var setupPlayersFirebase = function() {

@@ -14,7 +14,6 @@ var updateGame = function() {
 		playerTalk('yoann', updateMessageSpanText);
 	}*/
 
-
 	// move locally created bullets
     update_bullets();
     player.update();

@@ -28,6 +28,20 @@ body {
     width: 200px;
 }
 
+#messageSpan {
+	color: red;
+	padding: 5px;
+	padding-top: 5px;
+	width: 500px;
+	border: 1px solid yellow;
+}
+
+#photoSpan {
+	color: red;
+	padding: 5px;
+	padding-top: 5px;
+}
+
 .p0 {
     color: #f00;
 }
