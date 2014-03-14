@@ -12,6 +12,7 @@ var updateGame = function() {
 	// move locally created bullets
     update_bullets();
     player.update();
+	updateScoreFeed();
 }
 
 
@@ -20,5 +21,13 @@ function updateMessageSpanPhoto(user_id, photoUrl) {
 }
 
 function updateMessageSpanText(user_id, text) {
-	$(messageSpan).html(user_id + " says: " + text)
+	$(messageSpan).html(user_id + " says: " + text);
+}
+
+function updateScoreFeed() {
+	$('#scores').empty();
+	for (var i=0; i<players.length; i++){
+		var player = players[i];
+	 	$('#scores').append('<span style="color:' + player.color + '">' + player.name + ': ' + player.score + ' </span><br>');
+	}
 }
