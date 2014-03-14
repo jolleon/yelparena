@@ -1,3 +1,5 @@
+var maxBullets = 10;
+
 var Keys = {
     UP: 87, // w
     DOWN: 83, // s
@@ -32,22 +34,30 @@ var Keys = {
         delete this._pressed[event.keyCode];
     }
 };
+var Weapons = {
+	PISTOL: 1,
+	DUAL: 2,
+	SPREAD: 3,
+}
 
 Player = function(name, id){
+	var point = map.newPlayerCoordinates();
+
     this.name = name;
     this.score = 0;
-    this.x = map_dimensions.x / 2;
-    this.y = map_dimensions.y / 2;
+    this.speed = 1;
+    this.x = point.x;
+    this.y = point.y;
     this.direction = 0;
     this.color = randomBrightColor();
 	this.id = id;
     this.health = 10;
+	this.weapon = Weapons.PISTOL;
 }
 
 Player.prototype.move = function(direction) {
-    var speed = 1;
-    var x = this.x + speed * Math.cos(direction);
-    var y = this.y - speed * Math.sin(direction);
+    var x = this.x + this.speed * Math.cos(direction);
+    var y = this.y - this.speed * Math.sin(direction);
     this.direction = direction;
 
     var playerSize = 8; // margin so that you can't be too close to a wall
@@ -63,14 +73,45 @@ Player.prototype.move = function(direction) {
         this.x = x;
         this.y = y;
     }
+
     localPlayerDataRef.set(player);
 }
 
+Player.prototype.can_shoot = function() {
+	if (myBullets.length >= maxBullets) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 Player.prototype.shoot = function() {
-    var newBulletDataRef = bulletsDataRef.push();
-    var bullet = new Bullet(player);
-    newBulletDataRef.set(bullet);
-    myBullets.push({ref: newBulletDataRef, bullet:bullet});
+	if (!this.can_shoot()) {
+		return;
+	}
+
+	if (this.weapon === Weapons.PISTOL) {
+		var newBulletDataRef = bulletsDataRef.push();
+		var bullet = new Bullet(player, 0, 0, 0);
+		newBulletDataRef.set(bullet);
+		myBullets.push({ref: newBulletDataRef, bullet:bullet});
+	} else if (this.weapon === Weapons.DUAL) {
+		var derp_offsets = [-Math.PI/2, Math.PI/2];
+		$.each(derp_offsets, function(index, offset){
+			var newBulletDataRef = bulletsDataRef.push();
+			var bullet = new Bullet(player, 0, offset, 3);
+			newBulletDataRef.set(bullet);
+			myBullets.push({ref: newBulletDataRef, bullet:bullet});
+		});
+	} else if (this.weapon >= Weapons.SPREAD) {
+		var direction_offsets = [-0.1, 0, 0.1];
+		$.each(direction_offsets, function(index, offset){
+			var newBulletDataRef = bulletsDataRef.push();
+			var bullet = new Bullet(player, offset, 0, 0);
+			newBulletDataRef.set(bullet);
+			myBullets.push({ref: newBulletDataRef, bullet:bullet});
+		});
+	}
 	playSound(Keys.SHOOT);
 }
 
@@ -102,6 +143,15 @@ Player.prototype.update = function() {
             this.move(Math.PI);
         }
     }
+
+    if (this.health <= 0) {
+        var respawnCoords = map.newPlayerCoordinates();
+        this.x = respawnCoords.x;
+        this.y = respawnCoords.y;
+        this.health = 10;
+    }
+
+    localPlayerDataRef.set(player);
 
 }
 
