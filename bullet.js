@@ -28,16 +28,18 @@ update_bullets = function() {
 			var distance = get_distance(bullet.location(), current_player_location);
 
 			if (distance < 6) {
-				playerHit = current_player.name;
+				playerHit = current_player;
+                break;
 			}
 		}
 		if (playerHit) {
+            hitsDataRef.push({from: player.id, to: playerHit.id, size: myBullets[i].bullet.size});
             ref.remove();
 			myBullets.splice(i, 1);
 			i--;
 			delete b;
-            playerPhoto(playerHit, updateMessageSpanPhoto);
-            playerTalk(playerHit, updateMessageSpanText);
+            playerPhoto(playerHit.name, updateMessageSpanPhoto);
+            playerTalk(playerHit.name, updateMessageSpanText);
 			continue;
 		}
 
