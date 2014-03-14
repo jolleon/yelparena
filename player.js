@@ -34,10 +34,12 @@ var Keys = {
 };
 
 Player = function(name, id){
+	var point = map.newPlayerCoordinates();	
+	
     this.name = name;
     this.score = 0;
-    this.x = map_dimensions.x / 2;
-    this.y = map_dimensions.y / 2;
+    this.x = point.x;
+    this.y = point.y;
     this.direction = 0;
     this.color = randomBrightColor();
 	this.id = id;
