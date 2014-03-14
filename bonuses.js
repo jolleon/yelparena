@@ -31,7 +31,7 @@ apply_bonus = function(player, bonus){
         player.weapon += 1;
 	}	
     else if (bonus.type == 'damage') {
-		player.bulletSize = 10;
+		player.bulletSize++;
     }
 }
 
