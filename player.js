@@ -74,7 +74,10 @@ Player.prototype.move = function(direction) {
         this.y = y;
     }
 
-    localPlayerDataRef.set(player);
+	// only update sometimes
+	if (loop_counter % 10 == 0) {
+		localPlayerDataRef.set(player);
+	};
 }
 
 Player.prototype.can_shoot = function() {
@@ -202,7 +205,7 @@ var setupPlayersFirebase = function() {
 
 var limitFeedLength = function() {
 	while($('#feed > div').length > 9){
-		$('#feed > div').first().remove()	
+		$('#feed > div').first().remove()
 	}
 }
 
