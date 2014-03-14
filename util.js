@@ -53,7 +53,6 @@ function playerTalk(yelp_id, callback) {
 		}).done(function(data) {
 			var talkString = '';
 			if (typeof(data.response) !== 'undefined') {
-				console.log(data['response']);
 				if ((data['response'].indexOf('http') === -1) && (data['response'].length < 120)) {
 					text = data['response'];
 				}
