@@ -4,6 +4,7 @@ var drawPlayer = function(p) {
     var gunLength = pRadius + 5;
     ctx.fillStyle = p.color;
     ctx.fillRect(p.x - pRadius, p.y - pRadius, pSize, pSize);
+    ctx.fillText(p.name, p.x-15, p.y+15)
 
     // draw gun
     ctx.strokeStyle = p.color;
@@ -35,6 +36,7 @@ var drawMap = function() {
     ctx.fillStyle = '#999';
 	var game_block_dimensions = map.game_block_dimensions();
 	var map_block_coordinates = map.map_block_coordinates();
+
 	for (var i = 0; i < map_block_coordinates.length; i++) {
 		var point = map_block_coordinates[i];
 		ctx.fillRect(point.x, point.y, game_block_dimensions.width, game_block_dimensions.height);

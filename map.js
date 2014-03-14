@@ -25,6 +25,8 @@ function Map (game_width, game_height) {
 
 	this.game_width = game_width;
 	this.game_height = game_height;
+
+	this.wall_coordinates = [];
 }
 
 Map.prototype.game_block_dimensions = function() {
@@ -37,17 +39,19 @@ Map.prototype.game_block_dimensions = function() {
 }
 
 Map.prototype.map_block_coordinates = function() {
-	var map_block_coordinates = [];
-	var game_block_dimensions = this.game_block_dimensions();
-	for (var y = 0; y < this.map_height; y++) {
-		for (var x = 0; x < this.map_height; x++) {
-			if (!this.canMoveMap(x, y)) {
-				var point = {'x': x * game_block_dimensions.width, 'y': y * game_block_dimensions.height};
-				map_block_coordinates.push(point);
+	if (this.wall_coordinates.length === 0) {
+		var map_block_coordinates = [];
+		var game_block_dimensions = this.game_block_dimensions();
+		for (var y = 0; y < this.map_height; y++) {
+			for (var x = 0; x < this.map_height; x++) {
+				if (!this.canMoveMap(x, y)) {
+					var point = {'x': x * game_block_dimensions.width, 'y': y * game_block_dimensions.height};
+					this.wall_coordinates.push(point);
+				}
 			}
 		}
 	}
-	return map_block_coordinates;
+	return this.wall_coordinates
 }
 
 Map.prototype.convert_game_to_map_coordinates = function(game_x, game_y)  {
