@@ -18,3 +18,19 @@ function hexToRgba(hex, a) {
     var rgb = hexToRgb(hex);
     return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + a + ')';
 }
+
+
+function randomBrightColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    r = g = b = 0;
+    while (r + g + b < 16) {
+        r = Math.floor(Math.random() * 16);
+        g = Math.floor(Math.random() * 16);
+        b = Math.floor(Math.random() * 16);
+    }
+    color += letters[r];
+    color += letters[g];
+    color += letters[b];
+    return color;
+}
