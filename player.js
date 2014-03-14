@@ -46,7 +46,17 @@ Player.prototype.move = function(direction) {
     var x = this.x + speed * Math.cos(direction);
     var y = this.y - speed * Math.sin(direction);
     this.direction = direction;
-    if (map.canMove(x, y)) {
+
+    var playerSize = 8; // margin so that you can't be too close to a wall
+    var max_x = x + playerSize;
+    var max_y = y + playerSize;
+    var min_x = x - playerSize;
+    var min_y = y - playerSize;
+    if (map.canMove(x, y) &&
+         map.canMove(min_x, min_y) &&
+         map.canMove(max_x, min_y) &&
+         map.canMove(max_x, max_y) &&
+         map.canMove(min_x, max_y)) {
         this.x = x;
         this.y = y;
     }
