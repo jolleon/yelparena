@@ -1,4 +1,4 @@
-BONUS_TYPES = ['health']; //, 'weapon', 'damage', 'player_speed', 'bullet_speed'];
+BONUS_TYPES = ['health', 'player_speed']; //, 'weapon', 'damage',  'bullet_speed'];
 
 Bonus = function(position) {
     this.x = position.x;
@@ -8,7 +8,7 @@ Bonus = function(position) {
 
 
 maybe_spawn_bonus = function() {
-    if (Math.random() < 0.001){
+    if (Math.random() < 0.001 && bonuses.length < 10){
         var position = map.newPlayerCoordinates();
         var new_bonus = new Bonus(position);
         bonusesDataRef.push(new_bonus);
@@ -22,13 +22,16 @@ apply_bonus = function(player, bonus){
     if (bonus.type == 'health'){
         player.health += 5;
     }
+    else if (bonus.type == 'player_speed'){
+        player.speed *= 1.1;
+    }
 }
 
 
 update_bonuses = function() {
     for (var i = 0; i < bonuses.length; i++){
         var bonus = bonuses[i];
-        if (get_distance(player, bonus) < 30){
+        if (get_distance(player, bonus) < 20){
             console.log(player, bonus);
             apply_bonus(player, bonus);
             bonusesDataRef.child(bonus.id).remove();
@@ -64,6 +67,10 @@ drawBonuses = function() {
         if (bonus.type == 'health'){
             color = 'rgba(0,255,0,1)';
             text = 'H';
+        }
+        else if (bonus.type == 'player_speed'){
+            color = 'rgba(255,255,0,1)';
+            text = 'S';
         }
         var rad = ctx.createRadialGradient(
             bonus.x, bonus.y, 0,

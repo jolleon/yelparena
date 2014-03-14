@@ -1,9 +1,10 @@
-function Bullet(player){
-	this.x = player.x;
-	this.y = player.y;
+function Bullet(player, direction_radians, rotation_offset, rotation_distance){
+	this.x = player.x + (rotation_distance * Math.cos(rotation_offset + player.direction));
+	this.y = player.y + (rotation_distance * Math.sin(rotation_offset + player.direction));
+
 	this.color = player.color; //pick cool bullet color
 	this.speed = 3;
-	this.direction = player.direction;
+	this.direction = player.direction + direction_radians;
 	this.size = 3;
 }
 
