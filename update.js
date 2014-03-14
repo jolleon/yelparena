@@ -2,6 +2,7 @@ var photoSpan = $('#photoSpan').get(0);
 var messageSpan = $('#messageSpan').get(0);
 
 var updateGame = function() {
+
     
 	if(Keys.isDown(Keys.SHOOT)) {
 		var bullet = new Bullet(bullets.length, player);
@@ -13,11 +14,9 @@ var updateGame = function() {
 		playerTalk('yoann', updateMessageSpanText);
 	}*/
 
-	// move every buillet on screen
-	for (var i=0; i<bullets.length; i++){
-		var bullet = bullets[i];
-		bullet.update();
-	}
+
+	// move locally created bullets
+    update_bullets();
     player.update();
 }
 

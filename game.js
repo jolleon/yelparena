@@ -60,7 +60,8 @@ $(document).ready(function() {
     mapDataRef = new Firebase(firebaseUrl + 'map');
     map_dimensions = {'x': 0, 'y': 0};
     players = [];
-	bullets = [];
+    bullets = [];
+    myBullets = [];
 
     mapDataRef.on('value', function(snapshot) {
         map_dimensions = snapshot.val();
@@ -68,7 +69,6 @@ $(document).ready(function() {
         clearCanvas();
 
     });
-	setupBulletsFirebase();
 
     $('#name').focus();
     $('#name-prompt').submit(function(event) {
@@ -77,6 +77,7 @@ $(document).ready(function() {
         $('#name-prompt').attr('style', 'display:none');
 
         setupPlayersFirebase();
+        setupBulletsFirebase();
         createPlayer(name);
 
         // start the loop

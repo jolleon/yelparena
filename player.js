@@ -20,6 +20,11 @@ var Keys = {
     },
 
     onKeydown: function(event) {
+		// can only shoot once for each keyDown event
+		if ((event.keyCode == this.SHOOT) && (this._pressed[this.SHOOT] !== true)) {
+			player.shoot();
+		}
+
         this._pressed[event.keyCode] = true;
     },
 
@@ -49,6 +54,13 @@ Player.prototype.move = function(direction) {
     localPlayerDataRef.set(player);
 }
 
+Player.prototype.shoot = function() {
+    var newBulletDataRef = bulletsDataRef.push();
+    var bullet = new Bullet(player);
+    newBulletDataRef.set(bullet);
+    myBullets.push({ref: newBulletDataRef, bullet:bullet});
+	playSound(Keys.SHOOT);
+}
 
 Player.prototype.update = function() {
     if (Keys.isMoving()) {
@@ -77,8 +89,9 @@ Player.prototype.update = function() {
         else if (Keys.isDown(Keys.LEFT)) {
             this.move(Math.PI);
         }
-
     }
+
+
 
 }
 
