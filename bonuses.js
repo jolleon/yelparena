@@ -25,7 +25,7 @@ apply_bonus = function(player, bonus){
         player.health += 5;
     }
     else if (bonus.type == 'player_speed'){
-        player.speed *= 1.1;
+        player.speed *= 1.15;
     }
     else if (bonus.type == 'weapon'){
         player.weapon += 1;
