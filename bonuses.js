@@ -1,15 +1,16 @@
 BONUS_TYPES = ['health']; //, 'weapon', 'damage', 'player_speed', 'bullet_speed'];
 
-Bonus = function() {
-    this.x = 200;
-    this.y = 100;
+Bonus = function(position) {
+    this.x = position.x;
+    this.y = position.y;
     this.type = BONUS_TYPES[Math.floor(Math.random() * BONUS_TYPES.length)];
 }
 
 
 maybe_spawn_bonus = function() {
-    if (Math.random() < 0.05){
-        var new_bonus = new Bonus();
+    if (Math.random() < 0.001){
+        var position = map.newPlayerCoordinates();
+        var new_bonus = new Bonus(position);
         bonusesDataRef.push(new_bonus);
     }
     
