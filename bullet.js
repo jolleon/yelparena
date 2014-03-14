@@ -12,13 +12,16 @@ Bullet.prototype.location = function() {
 }
 
 update_bullets = function() {
-	$.each(myBullets, function(index, b) {
-
+	for (var i = 0; i < myBullets.length; i++) {
+		var b = myBullets[i];
         var bullet = b.bullet;
         var ref = b.ref;
+		var bullet_is_used = false;
 		for (var player_index = 0; player_index < players.length; player_index++) {
+			if (bullet_is_used === true) {
+				continue;
+			}
 			var current_player = players[player_index];
-			var player_is_shot = false;
 
 			// don't shoot yourself
 			if (current_player.id == player.id) {
@@ -28,11 +31,17 @@ update_bullets = function() {
 			var distance = get_distance(bullet.location(), current_player_location);
 
 			if (distance < 6) {
-                ref.remove();
-                delete bullet;
-                return true;
+				bullet_is_used = true;
 			}
 		}
+		if (bullet_is_used === true) {
+            ref.remove();
+			myBullets.splice(i, 1);
+			i--;
+			delete b;
+			continue;
+		}
+
 
         bullet.x += bullet.speed * Math.cos(bullet.direction);
         bullet.y -= bullet.speed * Math.sin(bullet.direction);
@@ -41,11 +50,11 @@ update_bullets = function() {
             ref.set(bullet);
         } else {
             ref.remove();
-            delete bullet;
-            return true;
+            delete b;
+			myBullets.splice(i, 1);
+			i--;
         }
-
-	});
+	}
 }
 
 var setupBulletsFirebase = function() {
