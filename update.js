@@ -3,17 +3,12 @@ var messageSpan = $('#messageSpan').get(0);
 
 var updateGame = function() {
 
-    
-	if(Keys.isDown(Keys.SHOOT)) {
-		var bullet = new Bullet(bullets.length, player);
-		playSound(Keys.SHOOT);
+	
+	if(Keys.isDown(Keys.SIM_IRC)) {
+		playerPhoto('tianyu', updateMessageSpanPhoto);
+		playerTalk('tianyu', updateMessageSpanText);
 	}
 	
-	/*if(Keys.isDown(Keys.BLARGH)) {
-		playerPhoto('yoann', updateMessageSpanPhoto);
-		playerTalk('yoann', updateMessageSpanText);
-	}*/
-
 	// move locally created bullets
     update_bullets();
     player.update();

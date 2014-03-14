@@ -36,16 +36,6 @@ var drawGame = function() {
     for(var i=0; i<players.length; i++){
         var p = players[i];
         drawPlayer(p);
-        
-        
-        // if player is hit, change the message div's contents to that player's
-        // random IRC message thing... 
-        /*
-         * if (p.isHit()) {
-         *     playerTalk('tianyu', updateMessageSpan);
-         * }
-         * 
-         */
     }
 	for(var i=0; i<bullets.length; i++){
 		var b = bullets[i];
