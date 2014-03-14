@@ -83,9 +83,6 @@ Player.prototype.update = function() {
 			this.shoot();
 	}
 
-	if (this.isHit()){
-		 // do something
-	}	
 	if (this.hit_counter != 0){
 		this.hit_counter -= 1;
 	}
@@ -107,7 +104,9 @@ Player.prototype.isHit = function() {
 }
 
 Player.prototype.shoot = function() {
-	var bullet = new Bullet(bullets.length, player);
+	var bullet = new Bullet(player);
+	//write into Firebase
+	bulletsDataRef.push(bullet);
 	player.hit_counter = 10;
 }
 

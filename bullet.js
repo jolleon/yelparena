@@ -1,5 +1,4 @@
-function Bullet(id, player){
-	this.id = id;
+function Bullet(player){
 	this.x = player.x;
 	this.y = player.y;
 	this.color = player.color; //pick cool bullet color
@@ -7,9 +6,6 @@ function Bullet(id, player){
 	this.direction = player.direction;
 	this.size = 2;
 	this.player_name = player.name;
-
-	//write into Firebase
-	bulletsDataRef.child(id).set(this);
 }
 
 Bullet.prototype.update = function() {
@@ -25,7 +21,9 @@ var setupBulletsFirebase = function() {
 	bulletsDataRef = new Firebase(firebaseUrl + 'bullets/');
 	
 	bulletsDataRef.on('child_added', function(snapshot){
-		bullets.push(snapshot.val());
+		var new_bullet = snapshot.val();
+		new_bullet.id = snapshot.name();
+		bullets.push(new_bullet);
 	});
 	bulletsDataRef.on('value', function(snapshot){
 	});
