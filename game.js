@@ -46,6 +46,7 @@ var startAnimation = function(){
 var fight = function() {
 	$('.fight').css('opacity', '1');
 	explosionSound.play();
+	$('.fight').animate({opacity: 0}, 3000);
 }
 
 
