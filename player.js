@@ -66,13 +66,6 @@ Player.prototype.move = function(direction) {
         this.y = y;
     }
 
-    if (player.health <= 0) {
-        var respawnCoords = map.newPlayerCoordinates();
-        player.x = respawnCoords.x;
-        player.y = respawnCoords.y;
-        player.health = 10;
-    }
-
     localPlayerDataRef.set(player);
 }
 
@@ -112,6 +105,16 @@ Player.prototype.update = function() {
             this.move(Math.PI);
         }
     }
+
+    if (this.health <= 0) {
+        var respawnCoords = map.newPlayerCoordinates();
+        this.x = respawnCoords.x;
+        this.y = respawnCoords.y;
+        this.health = 10;
+    }
+
+    localPlayerDataRef.set(player);
+
 }
 
 var setupPlayersFirebase = function() {
