@@ -4,6 +4,7 @@ var Keys = {
     LEFT: 65, // a
     RIGHT: 68, // d
     SHOOT: 32, // space
+    SIM_IRC: 66, //b
 
     _pressed: {},
 
@@ -100,6 +101,7 @@ Player.prototype.update = function() {
             this.move(Math.PI);
         }
     }
+
 }
 
 Player.prototype.is_shot = function() {
