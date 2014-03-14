@@ -1,5 +1,5 @@
 
-BONUS_TYPES = ['health', 'player_speed', 'weapon', 'damage']; //, 'damage',  'bullet_speed'];
+BONUS_TYPES = ['health', 'player_speed', 'weapon', 'damage']; //  'bullet_speed'];
 
 Bonus = function(position) {
     this.x = position.x;
