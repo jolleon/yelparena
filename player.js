@@ -139,6 +139,7 @@ var setupPlayersFirebase = function() {
         if (snapshot.val().to == player.id) {
             // ouch, got hit!
             player.health -= snapshot.val().size;
+            hitsDataRef.child(snapshot.name()).remove();
         }
     });
 }
