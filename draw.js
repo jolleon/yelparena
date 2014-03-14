@@ -26,6 +26,15 @@ var drawPlayer = function(p) {
     ctx.lineTo(p.x + gunLength * Math.cos(p.direction), p.y - gunLength * Math.sin(p.direction));
     ctx.stroke();
 
+	// draw health
+	var healthWidth = Math.max(0, p.health * 1.5);
+	ctx.strokeStyle = '#0c0';
+	ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.lineTo(p.x - healthWidth, p.y - 9);
+    ctx.lineTo(p.x + healthWidth, p.y - 9);
+    ctx.stroke();
+
 }
 
 
