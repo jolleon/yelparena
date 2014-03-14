@@ -3,38 +3,21 @@
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
 </head>
 <body>
-    <form id="name-prompt">
-        <label for="name-prompt" >Name</label>
-        <input type="text" id="name"><br>
-        <input type="submit" value="Join!">
+    <form id="name-prompt" action="javascript:;">
+        <input type="text" placeholder="type your yelp username"/>
     </form>
-    <table>
-        <tr>
-            <td rowspan=2>
-                <div id="content">
-                    <canvas id="main" width=1000 height=600>
-                    Your browser sucks.
-                    </canvas>
-                </div>
-                <div id="message">
-                	<span id="photoSpan"></span>
-                	<span id="messageSpan"></span>
-                </div>
-            </td>
-            <td rowspan=3>
-                 <div id="scores">
-                </div>
-				<div id="feed">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="info">
-                </div>
-            </td>
-        </tr>
-    </table>
+	<div class="container">
+        <div id="content">
+            <canvas id="main" width=1000 height=600></canvas>
+        </div>
+        <div id="message">
+            <span id="photoSpan"></span>
+            <span id="messageSpan"></span>
+        </div>
+        <div id="scores"></div>
+        <div id="feed"></div>
+        <div id="info"></div>
+	</div>
 </body>
 
 <script type="text/javascript" src="jquery-2.0.2.js"></script>
@@ -49,4 +32,3 @@
 <script type="text/javascript" src="map.js"></script>
 <script type="text/javascript" src="game.js"></script>
 <script type="text/javascript" src="sounds.js"></script>
-
