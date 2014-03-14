@@ -1,6 +1,7 @@
 function Bullet(player, direction_radians, rotation_offset, rotation_distance){
 	this.x = player.x + (rotation_distance * Math.cos(rotation_offset + player.direction));
 	this.y = player.y + (rotation_distance * Math.sin(rotation_offset + player.direction));
+    this.player = player.id;
 
 	this.color = player.color; //pick cool bullet color
 	this.speed = 3;
@@ -12,7 +13,7 @@ Bullet.prototype.location = function() {
 	return {x: this.x, y: this.y};
 }
 
-update_bullets = function() {
+update_my_bullets = function() {
 	for (var i = 0; i < myBullets.length; i++) {
 		var b = myBullets[i];
         var bullet = b.bullet;
@@ -49,7 +50,10 @@ update_bullets = function() {
         bullet.y -= bullet.speed * Math.sin(bullet.direction);
 
         if (map.canMove(bullet.x, bullet.y)){
-            ref.set(bullet);
+            if ((loop_counter % 10) == 0){
+                //update firebase only every 20 loops
+                ref.set(bullet);
+            }
         } else {
             ref.remove();
             delete b;
@@ -58,6 +62,17 @@ update_bullets = function() {
         }
 	}
 }
+
+
+update_bullets = function() {
+	for (var i = 0; i < bullets.length; i++) {
+		var bullet = bullets[i];
+        bullet.x += bullet.speed * Math.cos(bullet.direction);
+        bullet.y -= bullet.speed * Math.sin(bullet.direction);
+    }
+    update_my_bullets();
+}
+
 
 var setupBulletsFirebase = function() {
 
@@ -69,10 +84,13 @@ var setupBulletsFirebase = function() {
 		bullets.push(new_bullet);
 	});
 	bulletsDataRef.on('child_changed', function(snapshot){
-        for (var i=0; i<bullets.length; i++){
-            if (bullets[i].id == snapshot.name()){
-                bullets[i] = snapshot.val();
-                bullets[i].id = snapshot.name();
+        // don't update own bullets here
+        if (snapshot.val().player != player.id){
+            for (var i=0; i<bullets.length; i++){
+                if (bullets[i].id == snapshot.name()){
+                    bullets[i] = snapshot.val();
+                    bullets[i].id = snapshot.name();
+                }
             }
         }
 	});
