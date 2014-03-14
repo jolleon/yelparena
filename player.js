@@ -45,7 +45,7 @@ Player = function(name, id){
 
     this.name = name;
     this.score = 0;
-    this.speed = 1;
+    this.speed = 1.5;
     this.x = point.x;
     this.y = point.y;
     this.direction = 0;
