@@ -3,7 +3,7 @@ function Bullet(id, player){
 	this.x = player.x;
 	this.y = player.y;
 	this.color = player.color; //pick cool bullet color
-	this.speed = 1; // no idea what's appropriate here
+	this.speed = 3;
 	this.direction = player.direction;
 	this.size = 2;
 	this.player_name = player.name;
