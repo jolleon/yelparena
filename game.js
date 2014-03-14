@@ -1,6 +1,6 @@
 var canvas = $('#main').get(0);
 var ctx = canvas.getContext("2d");
-var map = new Map(canvas.width, canvas.height);
+var map = new Map(canvas.height, canvas.width);
 
 var clearCanvas = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
