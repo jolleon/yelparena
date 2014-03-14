@@ -3,6 +3,7 @@ var updateGame = function() {
     
 	if(Keys.isDown(Keys.SHOOT)) {
 		var bullet = new Bullet(bullets.length, player);
+		playSound(Keys.SHOOT);
 	}
 
 	// move every buillet on screen
