@@ -152,7 +152,9 @@ Player.prototype.update = function() {
     }
 
     if (this.health <= 0) {
+        var color = player.color;
         player = new Player(player.name, player.id);
+        player.color = color;
     }
 
     localPlayerDataRef.set(player);
