@@ -42,17 +42,28 @@ function randomBrightColor() {
  * playerTalk('lukas', consoleLog)
  */
 function playerTalk(yelp_id, callback) {
-	$.ajax({
-		type: 'GET',
-		url: talkServiceUrl,
-		data: { yelp_id : yelp_id}
-	}).done(function(data) {
-		var talkString = '';
-		if (typeof(data.response) !== 'undefined') {
-			talkString = data['response'];
+	var text = ':(';
+	var tries = 5;
+	for (var i = 0; i < tries; i++) {
+		$.ajax({
+			type: 'GET',
+			url: talkServiceUrl,
+			data: { yelp_id : yelp_id},
+			async: false
+		}).done(function(data) {
+			var talkString = '';
+			if (typeof(data.response) !== 'undefined') {
+				console.log(data['response']);
+				if ((data['response'].indexOf('http') === -1) && (data['response'].length < 120)) {
+					text = data['response'];
+				}
+			}
+		});
+		if (text !== ':(') {
+			break;
 		}
-		callback(yelp_id, talkString);
-	});
+	}
+	callback(yelp_id, text);
 }
 
 /* Gets player's photo url and calls callback
