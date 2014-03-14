@@ -92,6 +92,7 @@ Player.prototype.shoot = function() {
 
 	if (this.weapon === Weapons.PISTOL) {
 		var newBulletDataRef = bulletsDataRef.push();
+        newBulletDataRef.onDisconnect().remove();
 		var bullet = new Bullet(player, 0, 0, 0);
 		newBulletDataRef.set(bullet);
 		myBullets.push({ref: newBulletDataRef, bullet:bullet});
@@ -99,6 +100,7 @@ Player.prototype.shoot = function() {
 		var derp_offsets = [-Math.PI/2, Math.PI/2];
 		$.each(derp_offsets, function(index, offset){
 			var newBulletDataRef = bulletsDataRef.push();
+            newBulletDataRef.onDisconnect().remove();
 			var bullet = new Bullet(player, 0, offset, 3);
 			newBulletDataRef.set(bullet);
 			myBullets.push({ref: newBulletDataRef, bullet:bullet});
@@ -107,6 +109,7 @@ Player.prototype.shoot = function() {
 		var direction_offsets = [-0.1, 0, 0.1];
 		$.each(direction_offsets, function(index, offset){
 			var newBulletDataRef = bulletsDataRef.push();
+            newBulletDataRef.onDisconnect().remove();
 			var bullet = new Bullet(player, offset, 0, 0);
 			newBulletDataRef.set(bullet);
 			myBullets.push({ref: newBulletDataRef, bullet:bullet});
