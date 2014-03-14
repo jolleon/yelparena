@@ -8,6 +8,7 @@ var clearCanvas = function() {
 
 var resizeCanvas = function(w, h){
     if (h == undefined){
+		var scoreWidth = $('#scores').width();
         var feedWidth = $('#feed').width();
         var infoHeight = $('#info').height();
         canvas.width = window.innerWidth - feedWidth - 10;

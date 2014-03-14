@@ -24,6 +24,11 @@ body {
     border: 5px solid #999;
 }
 
+#scores{
+	width: 200px;
+	padding-bottom: 30px;
+}
+
 #feed{
     width: 200px;
 }
