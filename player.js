@@ -1,3 +1,5 @@
+var maxBullets = 10;
+
 var Keys = {
     UP: 87, // w
     DOWN: 83, // s
@@ -75,7 +77,19 @@ Player.prototype.move = function(direction) {
     localPlayerDataRef.set(player);
 }
 
+Player.prototype.can_shoot = function() {
+	if (myBullets.length >= maxBullets) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 Player.prototype.shoot = function() {
+	if (!this.can_shoot()) {
+		return;
+	}
+
 	if (this.weapon === Weapons.PISTOL) {
 		var newBulletDataRef = bulletsDataRef.push();
 		var bullet = new Bullet(player, 0, 0, 0);
