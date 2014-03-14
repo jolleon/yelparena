@@ -35,6 +35,9 @@ update_my_bullets = function() {
 			}
 		}
 		if (playerHit) {
+            player.score += 1;
+            localPlayerDataRef.set(player);
+
             hitsDataRef.push({from: player.id, to: playerHit.id, size: myBullets[i].bullet.size});
             ref.remove();
 			myBullets.splice(i, 1);
