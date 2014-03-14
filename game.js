@@ -59,7 +59,7 @@ $(document).ready(function() {
         });
     }
 
-    firebaseUrl = 'https://yelparena.firebaseio.com/'
+    firebaseUrl = 'https://radiant-fire-2100.firebaseio.com/'
     mapDataRef = new Firebase(firebaseUrl + 'map');
     map_dimensions = {'x': 0, 'y': 0};
     players = [];
