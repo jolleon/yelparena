@@ -41,6 +41,7 @@ Player = function(name, id){
     this.direction = 0;
     this.color = randomBrightColor();
 	this.id = id;
+    this.health = 10;
 }
 
 Player.prototype.move = function(direction) {
@@ -128,6 +129,16 @@ var setupPlayersFirebase = function() {
                 players[i] = snapshot.val();
                 players[i].id = snapshot.name();
             }
+        }
+    });
+
+
+    // tracking when my player is hit
+    hitsDataRef = new Firebase(firebaseUrl + 'hits');
+    hitsDataRef.on('child_added', function(snapshot){
+        if (snapshot.val().to == player.id) {
+            // ouch, got hit!
+            player.health -= snapshot.val().size;
         }
     });
 }
