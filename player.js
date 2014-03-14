@@ -51,6 +51,10 @@ Player.prototype.update = function() {
         this.direction = Math.PI;
         localPlayerDataRef.set(player);
     }
+    
+    if (Keys.isDown(Keys.SHOOT)) {
+		playSound(Keys.SHOOT);
+    }
 }
 
 var setupPlayersFirebase = function() {

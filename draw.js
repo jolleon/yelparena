@@ -4,7 +4,11 @@ var drawPlayer = function(p) {
     var gunLength = pRadius + 5;
     ctx.fillStyle = p.color;
     ctx.fillRect(p.x - pRadius, p.y - pRadius, pSize, pSize);
-    ctx.fillText(p.name, p.x-15, p.y+15)
+    ctx.fillText(p.name, p.x-15, p.y+15);
+    
+    var bubble = $('#main').get(0);
+    bubbleCtx = bubble.getContext('2d');
+    bubbleCtx.fillText("HELLO WORLD", p.x+10, p.y-10);
 
     // draw gun
     ctx.strokeStyle = p.color;
