@@ -32,10 +32,15 @@ var Keys = {
         delete this._pressed[event.keyCode];
     }
 };
+var Weapons = {
+	PISTOL: 1,
+	DUAL: 2,
+	SPREAD: 3,
+}
 
 Player = function(name, id){
-	var point = map.newPlayerCoordinates();	
-	
+	var point = map.newPlayerCoordinates();
+
     this.name = name;
     this.score = 0;
     this.speed = 1;
@@ -45,6 +50,7 @@ Player = function(name, id){
     this.color = randomBrightColor();
 	this.id = id;
     this.health = 10;
+	this.weapon = Weapons.PISTOL;
 }
 
 Player.prototype.move = function(direction) {
@@ -70,10 +76,28 @@ Player.prototype.move = function(direction) {
 }
 
 Player.prototype.shoot = function() {
-    var newBulletDataRef = bulletsDataRef.push();
-    var bullet = new Bullet(player);
-    newBulletDataRef.set(bullet);
-    myBullets.push({ref: newBulletDataRef, bullet:bullet});
+	if (this.weapon === Weapons.PISTOL) {
+		var newBulletDataRef = bulletsDataRef.push();
+		var bullet = new Bullet(player, 0, 0, 0);
+		newBulletDataRef.set(bullet);
+		myBullets.push({ref: newBulletDataRef, bullet:bullet});
+	} else if (this.weapon === Weapons.DUAL) {
+		var derp_offsets = [-Math.PI/2, Math.PI/2];
+		$.each(derp_offsets, function(index, offset){
+			var newBulletDataRef = bulletsDataRef.push();
+			var bullet = new Bullet(player, 0, offset, 3);
+			newBulletDataRef.set(bullet);
+			myBullets.push({ref: newBulletDataRef, bullet:bullet});
+		});
+	} else if (this.weapon === Weapons.SPREAD) {
+		var direction_offsets = [-0.1, 0, 0.1];
+		$.each(direction_offsets, function(index, offset){
+			var newBulletDataRef = bulletsDataRef.push();
+			var bullet = new Bullet(player, offset, 0, 0);
+			newBulletDataRef.set(bullet);
+			myBullets.push({ref: newBulletDataRef, bullet:bullet});
+		});
+	}
 	playSound(Keys.SHOOT);
 }
 

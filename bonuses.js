@@ -8,7 +8,7 @@ Bonus = function(position) {
 
 
 maybe_spawn_bonus = function() {
-    if (Math.random() < 0.001){
+    if (Math.random() < 0.001 && bonuses.length < 10){
         var position = map.newPlayerCoordinates();
         var new_bonus = new Bonus(position);
         bonusesDataRef.push(new_bonus);
@@ -28,7 +28,7 @@ apply_bonus = function(player, bonus){
 update_bonuses = function() {
     for (var i = 0; i < bonuses.length; i++){
         var bonus = bonuses[i];
-        if (get_distance(player, bonus) < 30){
+        if (get_distance(player, bonus) < 20){
             console.log(player, bonus);
             apply_bonus(player, bonus);
             bonusesDataRef.child(bonus.id).remove();
