@@ -38,7 +38,6 @@ var drawPlayer = function(p) {
 }
 
 
-
 var drawGame = function() {
     clearCanvas();
     drawMap();
