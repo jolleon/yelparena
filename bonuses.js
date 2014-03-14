@@ -59,19 +59,21 @@ drawBonuses = function() {
     for (var i = 0; i < bonuses.length; i++){
         var bonus = bonuses[i];
         var bSize = 10;
+        var color = 'white';
+        var text = '?';
         if (bonus.type == 'health'){
-            var rad = ctx.createRadialGradient(
-                bonus.x, bonus.y, 0,
-                bonus.x, bonus.y, bSize)
-            rad.addColorStop(0.4, 'rgba(0,0,0,0)');
-            rad.addColorStop(0.7, 'rgba(0,255,0,1)');
-            rad.addColorStop(0.9, 'rgba(0,0,0,0)');
-            ctx.fillStyle = rad;
-            ctx.fillRect(bonus.x - bSize, bonus.y - bSize, 2 * bSize, 2 * bSize);
-
-        } else {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(bonuses[i].x, bonuses[i].y, 20, 20);
+            color = 'rgba(0,255,0,1)';
+            text = 'H';
         }
+        var rad = ctx.createRadialGradient(
+            bonus.x, bonus.y, 0,
+            bonus.x, bonus.y, bSize)
+        rad.addColorStop(0.4, 'rgba(0,0,0,0)');
+        rad.addColorStop(0.7, color);
+        rad.addColorStop(0.9, 'rgba(0,0,0,0)');
+        ctx.fillStyle = rad;
+        ctx.fillRect(bonus.x - bSize, bonus.y - bSize, 2 * bSize, 2 * bSize);
+        ctx.fillStyle = color;
+        ctx.fillText(text, bonus.x - 3, bonus.y + 3);
     }
 }
