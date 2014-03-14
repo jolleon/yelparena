@@ -79,6 +79,7 @@ $(document).ready(function() {
 
         setupPlayersFirebase();
         setupBulletsFirebase();
+        setupBonuses();
         createPlayer(name);
 
         // start the loop

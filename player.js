@@ -38,6 +38,7 @@ Player = function(name, id){
 	
     this.name = name;
     this.score = 0;
+    this.speed = 1;
     this.x = point.x;
     this.y = point.y;
     this.direction = 0;
@@ -47,9 +48,8 @@ Player = function(name, id){
 }
 
 Player.prototype.move = function(direction) {
-    var speed = 1;
-    var x = this.x + speed * Math.cos(direction);
-    var y = this.y - speed * Math.sin(direction);
+    var x = this.x + this.speed * Math.cos(direction);
+    var y = this.y - this.speed * Math.sin(direction);
     this.direction = direction;
 
     var playerSize = 8; // margin so that you can't be too close to a wall
