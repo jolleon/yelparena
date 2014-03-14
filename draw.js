@@ -42,6 +42,7 @@ var drawPlayer = function(p) {
 var drawGame = function() {
     clearCanvas();
     drawMap();
+    drawBonuses();
     for(var i=0; i<players.length; i++){
         var p = players[i];
         drawPlayer(p);
