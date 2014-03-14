@@ -1,4 +1,4 @@
-BONUS_TYPES = ['health', 'player_speed']; //, 'weapon', 'damage',  'bullet_speed'];
+BONUS_TYPES = ['health', 'player_speed', 'weapon']; //, 'damage',  'bullet_speed'];
 
 Bonus = function(position) {
     this.x = position.x;
@@ -24,6 +24,9 @@ apply_bonus = function(player, bonus){
     }
     else if (bonus.type == 'player_speed'){
         player.speed *= 1.1;
+    }
+    else if (bonus.type == 'weapon'){
+        player.weapon += 1;
     }
 }
 
@@ -71,6 +74,10 @@ drawBonuses = function() {
         else if (bonus.type == 'player_speed'){
             color = 'rgba(255,255,0,1)';
             text = 'S';
+        }
+        else if (bonus.type == 'weapon'){
+            color = 'rgba(255,0,255,1)';
+            text = 'W';
         }
         var rad = ctx.createRadialGradient(
             bonus.x, bonus.y, 0,
