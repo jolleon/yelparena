@@ -11,6 +11,13 @@ var Keys = {
         return this._pressed[keyCode];
     },
 
+    isMoving: function() {
+        return this._pressed[this.UP] ||
+            this._pressed[this.DOWN] ||
+            this._pressed[this.LEFT] ||
+            this._pressed[this.RIGHT];
+    },
+
     onKeydown: function(event) {
         this._pressed[event.keyCode] = true;
     },
@@ -23,38 +30,59 @@ var Keys = {
 Player = function(name){
     this.name = name;
     this.score = 0;
-    this.x = map.x / 2;
-    this.y = map.y / 2;
+    this.x = map_dimensions.x / 2;
+    this.y = map_dimensions.y / 2;
     this.direction = 0;
     this.color = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'][Math.floor(Math.random()*6)];
 }
 
 
+Player.prototype.move = function(direction) {
+    var speed = 1;
+    var x = this.x + speed * Math.cos(direction);
+    var y = this.y - speed * Math.sin(direction);
+    this.direction = direction;
+    if (map.canMove(x, y)) {
+        this.x = x;
+        this.y = y;
+    }
+    localPlayerDataRef.set(player);
+}
+
+
 Player.prototype.update = function() {
-    if (Keys.isDown(Keys.DOWN)) {
-        this.y += 1;
-        this.direction = 3 * Math.PI / 2;
-        localPlayerDataRef.set(player);
+    if (Keys.isMoving()) {
+
+        if (Keys.isDown(Keys.UP) && Keys.isDown(Keys.RIGHT)) {
+            this.move(Math.PI / 4);
+        }
+        else if (Keys.isDown(Keys.UP) && Keys.isDown(Keys.LEFT)) {
+            this.move(3 * Math.PI / 4);
+        }
+        else if (Keys.isDown(Keys.DOWN) && Keys.isDown(Keys.LEFT)) {
+            this.move(5 * Math.PI / 4);
+        }
+        else if (Keys.isDown(Keys.DOWN) && Keys.isDown(Keys.RIGHT)) {
+            this.move(7 * Math.PI / 4);
+        }
+        else if (Keys.isDown(Keys.DOWN)) {
+            this.move(3 * Math.PI / 2);
+        }
+        else if (Keys.isDown(Keys.UP)) {
+            this.move(Math.PI / 2);
+        }
+        else if (Keys.isDown(Keys.RIGHT)) {
+            this.move(0);
+        }
+        else if (Keys.isDown(Keys.LEFT)) {
+            this.move(Math.PI);
+        }
+
     }
-    if (Keys.isDown(Keys.UP)) {
-        this.y -= 1;
-        this.direction = Math.PI / 2;
-        localPlayerDataRef.set(player);
-    }
-    if (Keys.isDown(Keys.RIGHT)) {
-        this.x += 1;
-        this.direction = 0;
-        localPlayerDataRef.set(player);
-    }
-    if (Keys.isDown(Keys.LEFT)) {
-        this.x -= 1;
-        this.direction = Math.PI;
-        localPlayerDataRef.set(player);
-    }
-    
     if (Keys.isDown(Keys.SHOOT)) {
 		playSound(Keys.SHOOT);
     }
+
 }
 
 var setupPlayersFirebase = function() {
