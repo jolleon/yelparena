@@ -2,13 +2,13 @@
 var updateGame = function() {
     
 	if(Keys.isDown(Keys.SHOOT)) {
-		var bullet = new Bullet(bullets.length, player);
+        var newBulletDataRef = bulletsDataRef.push();
+		var bullet = new Bullet(player);
+        newBulletDataRef.set(bullet);
+        myBullets.push({ref: newBulletDataRef, bullet:bullet});
 	}
 
-	// move every buillet on screen
-	for (var i=0; i<bullets.length; i++){
-		var bullet = bullets[i];
-		bullet.update();
-	}
+	// move locally created bullets
+    update_bullets();
     player.update();
 }
