@@ -32,6 +32,7 @@ var drawMap = function() {
     ctx.fillStyle = '#999';
 	var game_block_dimensions = map.game_block_dimensions();
 	var map_block_coordinates = map.map_block_coordinates();
+
 	for (var i = 0; i < map_block_coordinates.length; i++) {
 		var point = map_block_coordinates[i];
 		ctx.fillRect(point.x, point.y, game_block_dimensions.width, game_block_dimensions.height);
