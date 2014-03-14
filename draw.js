@@ -8,14 +8,15 @@ var drawPlayer = function(p) {
     rad.addColorStop(0, 'rgba(50, 50, 50, 0.5)');
     rad.addColorStop(0.4, p.color);
     rad.addColorStop(0.5, p.color);
-    rad.addColorStop(0.8, 'rgba(255, 255, 255, 0.2)');
+    rad.addColorStop(0.8, hexToRgba(p.color, 0.2));
     rad.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = rad;
     ctx.fillRect(p.x - pSize, p.y - pSize, 2 * pSize, 2 * pSize);
 
     // name
     ctx.fillStyle = p.color;
-    ctx.fillText(p.name, p.x-15, p.y+15)
+    ctx.font = "10px Lucida Console";
+    ctx.fillText(p.name, p.x - p.name.length * 3, p.y - gunLength - 2)
 
     // draw gun
     ctx.strokeStyle = p.color;
