@@ -43,8 +43,8 @@ update_my_bullets = function() {
 			myBullets.splice(i, 1);
 			i--;
 			delete b;
-            playerPhoto(playerHit.name, updateMessageSpanPhoto);
-            playerTalk(playerHit.name, updateMessageSpanText);
+            //playerPhoto(playerHit.name, updateMessageSpanPhoto);
+            //playerTalk(playerHit.name, updateMessageSpanText);
 			continue;
 		}
 
